@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Mozilla Market Pulse {% block title %}{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{{ static('img/favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="//www.mozilla.org/tabzilla/media/css/tabzilla.css" media="screen" />
+
+    <!--[if lte IE 8]>
+      <script src="{{ static('js/libs/html5shiv.js') }}"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="{{ static('css/bootstrap.min.css') }}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ static('css/sandstone.min.css') }}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ static('css/app.css') }}" media="screen" />
+    {% block css %}
+    {% endblock %}
+  </head>
+
+  <body class="stone">
+    <div id="outer-wrapper">
+      <div id="wrapper">
+        <header id="masthead">
+          <a href="http://www.mozilla.org/" id="tabzilla">Mozilla</a>
+
+          <h2>
+            <a href="{{ url('base:home') }}">
+              Mozilla Market Pulse
+            </a>
+          </h2>
+        </header>
+
+        {% block content %}
+        {% endblock %}
+      </div>
+
+      <footer id="colophon">
+        <div class="row">
+
+          <div class="footer-logo col-md-4">
+            <a href="https://www.mozilla.org"><img src="{{ static('img/sandstone/footer-mozilla.png') }}" alt="mozilla"></a>
+            <div>An experiment brought to you by Participation Infrastructure Team</div>
+          </div>
+
+          <div class="footer-license col-md-4">
+            <p>
+              Content available under a
+              <a href="https://www.mozilla.org/foundation/licensing/website-content.html">Creative Commons license</a>.
+            </p>
+            <p>
+              <a href="https://github.com/mozilla/marketpulse">Contribute to this app</a>
+            </p>
+          </div>
+
+          <div class="col-md-4">
+            <ul class="footer-nav">
+              <li><a href="https://www.mozilla.org/privacy">Privacy Policy</a></li>
+              <li><a href="https://www.mozilla.org/about/legal.html">Legal Notices</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </footer>
+    </div>
+
+    <script src="{{ static('js/libs/jquery-2.1.1.min.js') }}"></script>
+    <script src="{{ static('js/libs/bootstrap.min.js') }}"></script>
+    <script src="{{ static('js/site.js') }}"></script>
+    <script src="//mozorg.cdn.mozilla.net/tabzilla/tabzilla.js"></script>
+    <script src="{{ static('js/app.js') }}"></script>
+    {% block js %}
+    {% endblock %}
+
+  </body>
+</html>
