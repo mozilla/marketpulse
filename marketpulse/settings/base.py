@@ -30,16 +30,12 @@ TEMPLATE_DEBUG = config('DEBUG', default=DEBUG, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
+# Name of the top-level module where all the apps live.
+PROJECT_MODULE = 'marketpulse'
 
 # Application definition
 
 INSTALLED_APPS = [
-    # Project specific apps
-    'marketpulse.base',
-
-    # Third party apps
-    'django_nose',
-
     # Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,6 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third party apps
+    'django_nose',
+
+    # Project specific apps
+    '%s.base' % PROJECT_MODULE,
+    '%s.main' % PROJECT_MODULE,
 ]
 
 for app in config('EXTRA_APPS', default='', cast=Csv()):
