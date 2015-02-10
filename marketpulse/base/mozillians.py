@@ -39,8 +39,7 @@ class MozilliansClient():
 
     def _get_resource_url(self, resource):
         """Build Mozillians.org API resource url."""
-        url = '{0}/{1}'.format(self.base_url, resource)
-        return url
+        return urljoin(self.base_url, resource)
 
     def get_users(self, params=None):
         """GET Mozillians.org users."""
