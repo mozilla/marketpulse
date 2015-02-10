@@ -3,5 +3,6 @@ from django.conf.urls import patterns, url
 
 
 urlpatterns = patterns(
-    url(r'^$', '{0}.views.main'.format(settings.PROJECT_NAME), name='main'),
+    '{0}.main.views'.format(settings.PROJECT_MODULE),
+    url(r'^$', 'home', name='home'),
 )
