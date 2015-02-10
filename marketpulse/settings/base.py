@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     # Project specific apps
     '%s.base' % PROJECT_MODULE,
     '%s.main' % PROJECT_MODULE,
+    '%s.devices' % PROJECT_MODULE,
+    '%s.geo' % PROJECT_MODULE,
 ]
 
 for app in config('EXTRA_APPS', default='', cast=Csv()):
