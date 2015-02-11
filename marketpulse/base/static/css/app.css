@@ -1,0 +1,12 @@
+.container {
+    max-width: 1000px;
+}
+
+.main-logo {
+    margin-top: 1%;
+    width: 220px;
+}
+
+#onlineshop {
+    display: none;
+}
