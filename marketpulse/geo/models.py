@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class LocaltionBase(models.Model):
+class LocationBase(models.Model):
     """Model for geolocation data."""
 
     country = models.CharField(max_length=120, unique=True)

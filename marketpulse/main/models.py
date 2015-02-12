@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from marketpulse.devices.models import Device
-from marketpulse.geo.models import LocaltionBase
+from marketpulse.geo.models import LocationBase
 
 
 class Activity(models.Model):
@@ -18,7 +18,7 @@ class Activity(models.Model):
         return self.name
 
 
-class Location(LocaltionBase):
+class Location(LocationBase):
     address = models.CharField(max_length=120)
     shop_name = models.CharField(max_length=120, default='', blank=True)
     link = models.URLField(max_length=500, blank=True, default='')
