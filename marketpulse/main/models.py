@@ -6,6 +6,8 @@ from marketpulse.geo.models import LocationBase
 
 
 class Activity(models.Model):
+    """Model for activity types."""
+
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, max_length=255)
 
@@ -19,12 +21,16 @@ class Activity(models.Model):
 
 
 class Location(LocationBase):
+    """Model for contribution location."""
+
     address = models.CharField(max_length=120)
     shop_name = models.CharField(max_length=120, default='', blank=True)
     link = models.URLField(max_length=500, blank=True, default='')
 
 
 class Plan(models.Model):
+    """Mobile phone plan information."""
+
     has_plan = models.BooleanField(default=False)
     duration = models.IntegerField(default=None)
     description = models.TextField(default='', blank=True)
@@ -45,6 +51,8 @@ class Contribution(models.Model):
 
 
 class Price(models.Model):
+    """Mobile phone price model."""
+
     contribution = models.ForeignKey(Contribution)
     plan = models.ForeignKey(Plan)
     amount = models.IntegerField()
