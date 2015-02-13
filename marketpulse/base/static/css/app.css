@@ -10,3 +10,54 @@
 #onlineshop {
     display: none;
 }
+
+.switch {
+    text-align: right;
+}
+
+.switch label:first-child {
+    float:left;
+    font-weight: normal;
+    margin-top: 15px;
+}
+
+.hasplan {
+    display:none;
+}
+
+.planprices {
+    border-top: 1px lightgray solid;
+}
+
+.planprices:first-child {
+    border-top: none;
+}
+
+select.form-control {
+    height: 4rem;
+    line-height: 4rem;
+}
+
+fieldset {
+    font-size:1.8rem;
+}
+
+fieldset legend {
+    background-color: #CD5F5A;
+    color: white;
+    background-image: none !important;
+}
+
+@media only screen and (max-width:760px) {
+    #wrapper {
+        width: 98%;
+    }
+
+    .row {
+        margin-left: -15px;
+    }
+
+    h2.title {
+        text-align: center;
+    }
+}

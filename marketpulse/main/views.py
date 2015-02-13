@@ -7,8 +7,8 @@ def home(request):
 
 
 def activities(request):
-    return redirect(reverse('main:fxos_price_new'))
+    return redirect(reverse('main:fxosprice_new'))
 
 
-def fxos_price_new(request):
-    return render(request, 'fxos_price_new.html')
+def fxosprice_new(request):
+    return render(request, 'fxosprice_new.html')

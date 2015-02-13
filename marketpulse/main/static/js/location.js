@@ -18,13 +18,13 @@ $(document).ready(function() {
                 'marker-symbol': 'star'
             }
         });
-        $('#location-text').html("Location found. Click on map for adjusting location");
+        $('#location-text').html("Click on map for adjusting location.");
         $("#lat").val(e.latlng.lat);
         $("#lon").val(e.latlng.lng);
     });
 
     map.on('click', function(e) {
-        $("#location-text").html("Click on map for adjusting location");
+        $("#location-text").html("Click on map for adjusting location.");
         LocLayer.setGeoJSON({
             type: 'Feature',
             geometry: {
