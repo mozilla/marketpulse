@@ -28,6 +28,7 @@ DEBUG = config('DEBUG', cast=bool)
 
 TEMPLATE_DEBUG = config('DEBUG', default=DEBUG, cast=bool)
 
+SITE_URL = config('SITE_URL')
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Name of the top-level module where all the apps live.
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
     'django_nose',
 
     # Project specific apps
+    '%s.auth' % PROJECT_MODULE,
     '%s.base' % PROJECT_MODULE,
     '%s.main' % PROJECT_MODULE,
     '%s.devices' % PROJECT_MODULE,
@@ -142,3 +144,13 @@ CSP_STYLE_SRC = (
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Django-browserid settings
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
+                           'marketpulse.auth.backend.RemoBrowserIDBackend')
+BROWSERID_VERIFY_CLASS = 'marketpulse.auth.backend.BrowserIDVerify'
+BROWSERID_AUDIENCES = [SITE_URL]
+
+# Mozillians.org API settings
+MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
+MOZILLIANS_API_KEY = config('MOZILLIANS_API_KEY', default=None)
