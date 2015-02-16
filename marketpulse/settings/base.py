@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Third party apps
+    'django_browserid',
     'django_nose',
     'import_export',
 
@@ -114,9 +115,12 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
+JINGO_EXCLUDE_APPS = ['browserid', 'admin']
+
 # Django-CSP
 CSP_DEFAULT_SRC = (
     "'self'",
+    'https://login.persona.org',
     'https://*.tiles.mapbox.com',
     'https://*.cloudfront.net',
 )
@@ -127,6 +131,7 @@ CSP_FONT_SRC = (
 )
 CSP_IMG_SRC = (
     "'self'",
+    'data:',
     'http://*.mozilla.net',
     'https://*.mozilla.net',
     'https://*.tiles.mapbox.com',
@@ -137,6 +142,7 @@ CSP_SCRIPT_SRC = (
     'https://www.mozilla.org',
     'http://*.mozilla.net',
     'https://*.mozilla.net',
+    'https://login.persona.org',
     'https://*.mapbox.com',
 )
 CSP_STYLE_SRC = (
@@ -154,8 +160,11 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Django-browserid settings
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
                            'marketpulse.auth.backend.MozilliansAuthBackend')
+
 BROWSERID_VERIFY_CLASS = 'marketpulse.auth.backend.BrowserIDVerify'
-BROWSERID_AUDIENCES = [SITE_URL]
+BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
+LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL_FAILURE = '/'
 
 # Mozillians.org API settings
 MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
