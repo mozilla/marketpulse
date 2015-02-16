@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block css %}
+  <link href="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css" rel="stylesheet" />
+  <link href="{{ static('css/map.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <h2 class="title">Firefox OS prices</h2>
+
+  <form>
+    {{ csrf() }}
+    <div class="row">
+      <div class="col-md-6">
+
+        <fieldset>
+          <legend>Shop</legend>
+          <div class="form-group switch">
+            <label>Is this an online shop?</label>
+            <label class="pack-switch">
+              <input type="checkbox" id="onlineshop-check">
+              <span></span>
+            </label>
+          </div>
+          <div class="form-group">
+            <input type="text" name="shop_name" placeholder="Shop Name" required>
+          </div>
+          <div class="form-group" id="onlineshop">
+            <div class="form-group">
+              <input type="url" name="link" placeholder="Shop link">
+            </div>
+            <div class="form-group">
+              <select name="country" class="form-control" placeholder="Country">
+                <option>Greece</option>
+              </select>
+              <section class="scrollable">
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset id="location">
+          <legend>Location</legend>
+          <div class="form-group">
+            <div id="map"></div>
+            <small id="location-text">Getting your location...</small>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Device</legend>
+          <div class="form-group">
+            <select name="device-name" class="form-control">
+              <option selected>Model</option>
+              <option>Alcatel One Touch</option>
+              <option>LG Fireweb</option>
+            </select>
+          </div>
+          <div class="form-group switch">
+            <label>Purchase availability</label>
+            <label class="pack-switch">
+              <input type="checkbox" checked>
+              <span></span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-md-6">
+        <fieldset>
+          <legend>Prices</legend>
+          <div id="fieldset-planprices">
+            <div class="form-group planprices">
+              <div class="form-group switch">
+                <label>Is this a plan?</label>
+                <label class="pack-switch">
+                  <input type="checkbox" class="hasplan-check" name="has_plan">
+                  <span></span>
+                </label>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <input type="number" name="price" placeholder="Price">
+                </div>
+                <div class="col-xs-4">
+                  <select name="currency" class="form-control">
+                    <option selected>Currency</option>
+                    <option>&euro;</option>
+                    <option>$</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group hasplan">
+                <select name="carrier" class="form-control">
+                  <option selected>Carrier</option>
+                  <option>Cosmote</option>
+                  <option>Vodafone</option>
+                </select>
+              </div>
+              <div class="form-group hasplan">
+                <input type="text" name="description" placeholder="Plan name">
+              </div>
+              <div class="form-group hasplan">
+                <label></label>
+                <input type="text" name="duration" placeholder="Plan duration">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <a href="#" id="planprices-addfield" class="btn btn-default">Add price</a>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Comment</legend>
+          <div class="form-group">
+            <textarea name="comment" rows="3"></textarea>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block js %}
+  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
+  <script src="{{ static('js/location.js') }}"></script>
+  <script src="{{ static('js/price_new.js') }}"></script>
+{% endblock %}

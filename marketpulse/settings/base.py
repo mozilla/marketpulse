@@ -116,6 +116,8 @@ TEMPLATE_LOADERS = (
 # Django-CSP
 CSP_DEFAULT_SRC = (
     "'self'",
+    'https://*.tiles.mapbox.com',
+    'https://*.cloudfront.net',
 )
 CSP_FONT_SRC = (
     "'self'",
@@ -126,6 +128,7 @@ CSP_IMG_SRC = (
     "'self'",
     'http://*.mozilla.net',
     'https://*.mozilla.net',
+    'https://*.tiles.mapbox.com',
 )
 CSP_SCRIPT_SRC = (
     "'self'",
@@ -133,6 +136,7 @@ CSP_SCRIPT_SRC = (
     'https://www.mozilla.org',
     'http://*.mozilla.net',
     'https://*.mozilla.net',
+    'https://*.mapbox.com',
 )
 CSP_STYLE_SRC = (
     "'self'",
@@ -141,6 +145,7 @@ CSP_STYLE_SRC = (
     'https://www.mozilla.org',
     'http://*.mozilla.net',
     'https://*.mozilla.net',
+    'https://*.mapbox.com',
 )
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
