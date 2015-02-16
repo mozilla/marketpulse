@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     # Third party apps
     'django_nose',
+    'import_export',
 
     # Project specific apps
     '%s.auth' % PROJECT_MODULE,
