@@ -152,7 +152,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Django-browserid settings
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-                           'marketpulse.auth.backend.RemoBrowserIDBackend')
+                           'marketpulse.auth.backend.MozilliansAuthBackend')
 BROWSERID_VERIFY_CLASS = 'marketpulse.auth.backend.BrowserIDVerify'
 BROWSERID_AUDIENCES = [SITE_URL]
 
