@@ -159,3 +159,7 @@ BROWSERID_AUDIENCES = [SITE_URL]
 # Mozillians.org API settings
 MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
 MOZILLIANS_API_KEY = config('MOZILLIANS_API_KEY', default=None)
+
+# Mapbox API
+MAPBOX_MAP_ID = config('MAPBOX_MAP_ID', default=None)
+MAPBOX_TOKEN = config('MAPBOX_TOKEN', default=None)

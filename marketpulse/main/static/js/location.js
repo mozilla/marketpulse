@@ -1,7 +1,10 @@
 $(document).ready(function() {
-    L.mapbox.accessToken = "pk.eyJ1IjoiY29temVyYWRkIiwiYSI6ImxjQjFHNFUifQ.ohrYy34a8ZIZejrPSMWIww";
+    var mapboxid = $('div#map').data('mapboxid');
+    var mapboxtoken = $('div#map').data('mapboxtoken');
+
+    L.mapbox.accessToken = mapboxtoken;
     L.mapbox.config.FORCE_HTTPS = true;
-    var map = L.mapbox.map("map", "comzeradd.l6835lk3").setView([29, 22.5], 2);;
+    var map = L.mapbox.map("map", mapboxid).setView([29, 22.5], 2);;
     var LocLayer = L.mapbox.featureLayer().addTo(map);
     map.locate();
 

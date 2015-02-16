@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 
 def home(request):
@@ -11,4 +12,5 @@ def activities(request):
 
 
 def fxosprice_new(request):
-    return render(request, 'fxosprice_new.html')
+    return render(request, 'fxosprice_new.html',
+                  {'mapbox_id': settings.MAPBOX_MAP_ID, 'mapbox_token': settings.MAPBOX_TOKEN})
