@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from import_export import resources
+from django_countries import countries
+from import_export import fields, resources
 from import_export.admin import ExportMixin
 
 from marketpulse.main.models import Activity, Contribution, Location, Plan, Price
@@ -17,13 +18,19 @@ class LocationResource(resources.ModelResource):
 
 
 class ContributionResource(resources.ModelResource):
+    country = fields.Field()
+
     class Meta:
         model = Contribution
         fields = ('user__id', 'user__first_name', 'user__last_name', 'activity__id',
-                  'activity__name', 'location__country', 'location__country_code',
-                  'location__region', 'location__city', 'location__lat', 'location__lng',
-                  'device__id', 'device__name', 'device__model', 'device__manufacturer',
+                  'activity__name', 'location__region', 'location__city', 'location__lat',
+                  'location__lng', 'device__name', 'device__model', 'device__manufacturer',
                   'created_on', 'updated_on', 'comment', 'availability')
+
+    def dehydrate_country(self, contribution):
+        if contribution.location.country:
+            return '{0}'.format(dict(countries)[contribution.location.country.code])
+        return ''
 
 
 class PriceResource(resources.ModelResource):
@@ -42,7 +49,7 @@ class ActivityAdmin(ExportMixin, admin.ModelAdmin):
 @admin.register(Location)
 class LocationAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = LocationResource
-    list_display = ('address', 'shop_name', 'link')
+    list_display = ('shop_name', 'link', 'address')
 
 
 @admin.register(Plan)

@@ -64,7 +64,6 @@ a:hover.persona-button {
     }
 }
 
-
 /* Navigation
 ==================== */
 
@@ -164,6 +163,15 @@ ul.dropdown-menu > li > a:hover {
         z-index: 1000;
         display: none;
     }
+}
+
+/* Form errors
+==================== */
+small.error {
+    margin: 0 0 20px 0;
+    background-color: #c00000;
+    border-color: #c00000;
+    color: #fff;
 }
 
 
