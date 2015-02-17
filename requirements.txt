@@ -107,3 +107,10 @@ six==1.9.0
 mock==1.0.1
 # sha256: EXGi39Bz0MuXOkgtic_AweW52n1VHcCgAkEoZ-z1KT4
 django-browserid==0.11.1
+# sha256: u3YyG9KpVH3lX0vNCWiXc2l826pZpoz5Nnr8UU7uuDs
+django-import-export==0.2.6
+# sha256: sfDTXD0rLEDTOjEMqZ83IjJkh58uU8Y8Hsv67vwmkZ0
+# sha256: QcLa1_SR9VV-Ing6mvgb7WL3tvsNev1MLuMB8-tCjJM
+tablib==0.10.0
+# sha256: nbpWEfvyeJM0c0n9UcwZEctANoKnFjNzrazFZdEeLkw
+diff-match-patch==20121119
