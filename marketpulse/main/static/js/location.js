@@ -1,4 +1,6 @@
 $(document).ready(function() {
+    'use strict';
+
     var mapboxid = $('div#map').data('mapboxid');
     var mapboxtoken = $('div#map').data('mapboxtoken');
 
