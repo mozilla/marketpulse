@@ -61,3 +61,16 @@ fieldset legend {
         text-align: center;
     }
 }
+
+#colophon {
+  background-color: #CD5F5A;
+  color: #eee;
+}
+
+#colophon .footer-logo img {
+  margin-bottom: 10px;
+}
+
+#colophon a:hover, #colophon a:active, #colophon a:focus {
+  color: #76D3FF !important;
+}
