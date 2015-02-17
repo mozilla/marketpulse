@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
 
 from uuslug import uuslug
@@ -52,7 +52,7 @@ class Plan(models.Model):
 class Contribution(models.Model):
     """Model for contribution data."""
 
-    user = models.ForeignKey(User, related_name='contributions')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='contributions')
     activity = models.ForeignKey(Activity, related_name='contributions')
     location = models.ForeignKey(Location, related_name='contributions')
     device = models.ForeignKey(Device, related_name='contributions')

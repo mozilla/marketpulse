@@ -23,3 +23,17 @@ class MozilliansAuthBackend(BrowserIDBackend):
                                         lambda x: True)
 
         return user and authentication_policy(user)
+
+    def create_user(self, email):
+        user = super(MozilliansAuthBackend, self).create_user(email)
+
+        try:
+            mozillian = self.mozillians_client.lookup_user({'email': email})
+        except:
+            mozillian = None
+
+        if user and mozillian:
+            user.mozillians_url = mozillian['url']
+            user.save()
+
+        return user

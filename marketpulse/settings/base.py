@@ -74,9 +74,9 @@ MIDDLEWARE_CLASSES = (
     'csp.middleware.CSPMiddleware',
 )
 
-ROOT_URLCONF = 'marketpulse.urls'
+ROOT_URLCONF = '%s.urls' % PROJECT_MODULE
 
-WSGI_APPLICATION = 'marketpulse.wsgi.application'
+WSGI_APPLICATION = '%s.wsgi.application' % PROJECT_MODULE
 
 
 # Database
@@ -159,10 +159,10 @@ CSP_STYLE_SRC = (
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Django-browserid settings
+AUTH_USER_MODEL = 'mozillians_auth.User'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-                           'marketpulse.auth.backend.MozilliansAuthBackend')
-
-BROWSERID_VERIFY_CLASS = 'marketpulse.auth.backend.BrowserIDVerify'
+                           '%s.auth.backend.MozilliansAuthBackend' % PROJECT_MODULE)
+BROWSERID_VERIFY_CLASS = '%s.auth.backend.BrowserIDVerify' % PROJECT_MODULE
 BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
