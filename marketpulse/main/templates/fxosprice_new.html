@@ -8,33 +8,40 @@
 {% block content %}
   <h2 class="title">Firefox OS prices</h2>
 
-  <form>
+  <form method="post">
     {{ csrf() }}
+
     <div class="row">
       <div class="col-md-6">
+        {% if location_form.errors or contribution_form.error %}
+          <div>
+            <small class="error">Please correct the following errors</small>
+          </div>
+        {% endif %}
 
         <fieldset>
           <legend>Shop</legend>
           <div class="form-group switch">
-            <label>Is this an online shop?</label>
+            <label for="id_is_online">Is this an online shop?</label>
             <label class="pack-switch">
-              <input type="checkbox" id="onlineshop-check">
+              {{ location_form.is_online }}
               <span></span>
             </label>
           </div>
           <div class="form-group">
-            <input type="text" name="shop_name" placeholder="Shop Name" required>
+            {{ field_with_attrs(location_form.shop_name,
+                                placeholder='Please provide the name of the shop')}}
+            {{ field_errors(location_form.shop_name) }}
           </div>
           <div class="form-group" id="onlineshop">
             <div class="form-group">
-              <input type="url" name="link" placeholder="Shop link">
+              {{ field_with_attrs(location_form.link, placeholder="http://www.example.com") }}
+              {{ field_errors(location_form.link) }}
             </div>
             <div class="form-group">
-              <select name="country" class="form-control" placeholder="Country">
-                <option>Greece</option>
-              </select>
-              <section class="scrollable">
+              {{ field_with_attrs(location_form.country, class="form-control") }}
             </div>
+            {{ field_errors(location_form.country) }}
           </div>
         </fieldset>
 
@@ -43,22 +50,23 @@
           <div class="form-group">
             <div id="map" data-mapboxid="{{ mapbox_id }}" data-mapboxtoken="{{ mapbox_token }}"></div>
             <small id="location-text">Getting your location...</small>
+            {{ location_form.lat }}
+            {{ location_form.lng }}
           </div>
+          {{ field_errors(location_form.lat) }}
+          {{ field_errors(location_form.lng) }}
         </fieldset>
 
         <fieldset>
           <legend>Device</legend>
           <div class="form-group">
-            <select name="device-name" class="form-control">
-              <option selected>Model</option>
-              <option>Alcatel One Touch</option>
-              <option>LG Fireweb</option>
-            </select>
+            {{ field_with_attrs(contribution_form.device, class="form-control") }}
           </div>
+          {{ field_errors(contribution_form.device) }}
           <div class="form-group switch">
-            <label>Purchase availability</label>
+            <label for="id_availability">Purchase availability</label>
             <label class="pack-switch">
-              <input type="checkbox" checked>
+              {{ contribution_form.availability }}
               <span></span>
             </label>
           </div>

@@ -9,4 +9,4 @@ class Device(models.Model):
     manufacturer = models.CharField(max_length=120, unique=True)
 
     def __unicode__(self):
-        return self.name
+        return '{0}, {1}, {2}'.format(self.name, self.model, self.manufacturer)

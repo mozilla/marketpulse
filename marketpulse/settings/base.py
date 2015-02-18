@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_browserid',
     'django_nose',
     'import_export',
+    'django_countries',
 
     # Project specific apps
     '%s.auth' % PROJECT_MODULE,

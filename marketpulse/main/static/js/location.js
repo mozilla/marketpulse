@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     L.mapbox.accessToken = mapboxtoken;
     L.mapbox.config.FORCE_HTTPS = true;
-    var map = L.mapbox.map("map", mapboxid).setView([29, 22.5], 2);;
+    var map = L.mapbox.map("map", mapboxid).setView([29, 22.5], 2);
     var LocLayer = L.mapbox.featureLayer().addTo(map);
     map.locate();
 
@@ -24,8 +24,8 @@ $(document).ready(function() {
             }
         });
         $("#location-text").html("Click on map for adjusting location.");
-        $("#lat").val(e.latlng.lat);
-        $("#lon").val(e.latlng.lng);
+        $("#id_lat").val(e.latlng.lat);
+        $("#id_lng").val(e.latlng.lng);
     });
 
     map.on("click", function(e) {
@@ -41,8 +41,8 @@ $(document).ready(function() {
                 "marker-symbol": "star"
             }
         });
-        $("#lat").val(e.latlng.lat);
-        $("#lon").val(e.latlng.lng);
+        $("#id_lat").val(e.latlng.lat);
+        $("#id_lng").val(e.latlng.lng);
     });
 
     map.on("locationerror", function() {
