@@ -77,48 +77,51 @@
           <legend>Prices</legend>
           <div id="fieldset-planprices">
             <div class="form-group planprices">
-              <div class="form-group switch">
-                <label>Is this a plan?</label>
-                <label class="pack-switch">
-                  <input type="checkbox" class="hasplan-check" name="has_plan">
-                  <span></span>
-                </label>
-              </div>
-              <div class="row">
-                <div class="col-xs-8">
-                  <input type="number" name="price" placeholder="Price">
+              {% for plan_form in plan_formset %}
+                <div class="form-group switch">
+                  <label>Is this a plan?</label>
+                  <label class="pack-switch">
+                    {{ field_with_attrs(plan_form.has_plan, class="hasplan-check") }}
+                    <span></span>
+                  </label>
+                  {{ field_errors(plan_form.has_plan) }}
                 </div>
-                <div class="col-xs-4">
-                  <select name="currency" class="form-control">
-                    <option selected>Currency</option>
-                    <option>&euro;</option>
-                    <option>$</option>
-                  </select>
+                <div class="row">
+                  <div class="col-xs-8">
+                    {{ field_with_attrs(plan_form.amount, placeholder="Price") }}
+                    {{ field_errors(plan_form.amount) }}
+                  </div>
+                  <div class="col-xs-4">
+                    {{ field_with_attrs(plan_form.currency, class="form-control")}}
+                    {{ field_errors(plan_form.currency) }}
+                  </div>
                 </div>
-              </div>
-              <div class="form-group hasplan">
-                <select name="carrier" class="form-control">
-                  <option selected>Carrier</option>
-                  <option>Cosmote</option>
-                  <option>Vodafone</option>
-                </select>
-              </div>
-              <div class="form-group hasplan">
-                <input type="text" name="description" placeholder="Plan name">
-              </div>
-              <div class="form-group hasplan">
-                <input type="text" name="duration" placeholder="Plan duration">
-              </div>
+                <div id="hasplan-{{ plan_form.prefix }}" class="form-group hasplan">
+                  {{ field_with_attrs(plan_form.carrier,
+                                      placeholder="Carrier name",
+                                      class="form-control") }}
+                  {{ field_errors(plan_form.carrier) }}
+                </div>
+                <div class="form-group hasplan">
+                  {{ field_with_attrs(plan_form.description, placeholder="Plan name") }}
+                  {{ field_errors(plan_form.description) }}
+                </div>
+                <div class="form-group hasplan">
+                  <label></label>
+                  {{ field_with_attrs(plan_form.duration, placeholder="Plan duration") }}
+                  {{ field_errors(plan_form.duration) }}
+                </div>
+              {% endfor %}
             </div>
           </div>
-          <div class="form-group">
-            <a href="#" id="planprices-addfield" class="btn btn-default">Add another price</a>
-          </div>
+          {{ plan_formset.management_form }}
         </fieldset>
         <fieldset>
           <legend>Comment</legend>
           <div class="form-group">
-            <textarea name="comment" rows="3"></textarea>
+            {{ field_with_attrs(contribution_form.comment,
+                                rows="3",
+                                placeholder="Add any comments")}}
           </div>
         </fieldset>
       </div>
@@ -133,6 +136,7 @@
 
 {% block js %}
   <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
+  <script src="{{ static('js/jquery.formset.js') }}"></script>
   <script src="{{ static('js/location.js') }}"></script>
   <script src="{{ static('js/price_new.js') }}"></script>
 {% endblock %}
