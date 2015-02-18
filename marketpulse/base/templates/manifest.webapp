@@ -1,0 +1,20 @@
+{
+    "name": "Mozilla Marketpulse",
+    "description": "Web app to help gather local market data for Firefox OS",
+    "icons": {
+        "64": "/img/icon-64.png",
+        "128": "/img/icon-128.png",
+        "512": "/img/icon-512.png"
+    },
+    "developer": {
+        "name": "Mozilla",
+        "url": "https://github.com/mozilla/marketpulse"
+    },
+    "permissions": {
+        "geolocation": {
+            "description": "Required for finding your location"
+        }
+    },
+    "default_locale": "en",
+    "version": "0.1"
+}

@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.urlresolvers import reverse
 from django.http import Http404
+from django.http import HttpResponse
 
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
 from marketpulse.main.models import Activity, Contribution
@@ -78,3 +79,11 @@ def activities(request):
                   {'user': request.user,
                    'total_contributions': total_contributions,
                    'percent': percent})
+
+
+def manifest(request):
+    data = render(request, 'manifest.webapp')
+    response = HttpResponse(data,
+                            content_type='application/x-web-app-manifest+json; charset=utf-8')
+    response['Content-Disposition'] = 'attachment;filename=manifest.webapp'
+    return response
