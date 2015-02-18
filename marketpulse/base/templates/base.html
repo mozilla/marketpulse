@@ -24,23 +24,38 @@
   </head>
 
   <body class="stone">
+    {{ browserid_info() }}
     <div id="outer-wrapper">
       <div id="wrapper">
         <header id="masthead">
-          <a href="http://www.mozilla.org/" id="tabzilla">Mozilla</a>
+          <div>
+            <a href="http://www.mozilla.org/" id="tabzilla">Mozilla</a>
+          </div>
 
-          <h2 class="hidden-xs">
+          <div id="navigation" role="navigation">
+            <a id="hamburger-button" href="#"><img src="{{ static('img/hamburger.png') }}" /></a>
+
             <a href="{{ url('main:home') }}">
               <img class="main-logo" src="{{ static('img/marketpulse.png') }}" alt="Marketpulse">
             </a>
-          </h2>
-          {{ browserid_info() }}
-          {% if user.is_authenticated() %}
-            <p>Current user: {{ user.email }}</p>
-            {{ browserid_logout(text='Logout') }}
-          {% else %}
-            {{ browserid_login(text='Login', color='dark') }}
-          {% endif %}
+
+            <div id="nav-main">
+              {% if user.is_authenticated() %}
+                <a href="#" class="dropdown-toggle">
+                  <span class="username">
+                  {{ user.email }}
+                  </span>
+                </a>
+                <ul class="dropdown-menu" id="dropdown-menu">
+                  <li>
+                    {{ browserid_logout(text='Logout') }}
+                  </li>
+                </ul>
+              {% else %}
+                {{ browserid_login(text='Login', color='dark') }}
+              {% endif %}
+            </div>
+          </nav>
         </header>
 
         <div class="container">
@@ -55,7 +70,7 @@
           <div class="footer-logo col-md-4">
             <a href="https://www.mozilla.org"><img src="{{ static('img/sandstone/footer-mozilla.png') }}" alt="mozilla"></a>
             <p class="license">
-              Portions of this content are ©1998–2015 by individual mozilla.org contributors. Content available under a 
+              Portions of this content are ©1998–2015 by individual mozilla.org contributors. Content available under a
               <a href="https://www.mozilla.org/en-US/foundation/licensing/website-content/">Creative Commons license</a>.
             </p>
           </div>

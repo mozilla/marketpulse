@@ -1,12 +1,12 @@
 $(document).ready(function() {
-    'use strict';
+    "use strict";
 
-    $('#planprices-addfield').click(function() {
+    $("#planprices-addfield").click(function() {
         $(".planprices:first").clone().appendTo("#fieldset-planprices");
         return false;
     });
 
-    $('#onlineshop-check').click(function() {
+    $("#onlineshop-check").click(function() {
         var n = $("#onlineshop-check:checked").length;
         if (n === 0) {
             $("#location").show();
@@ -22,10 +22,10 @@ $(document).ready(function() {
 
         if (n === 0) {
             console.log(n);
-            $(this).closest(".planprices").find('.hasplan').hide();
+            $(this).closest(".planprices").find(".hasplan").hide();
         } else {
             console.log(n);
-            $(this).closest(".planprices").find('.hasplan').show();
+            $(this).closest(".planprices").find(".hasplan").show();
         }
     });
 });

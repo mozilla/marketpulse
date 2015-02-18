@@ -1,10 +1,8 @@
+/* Generic
+==================== */
+
 .container {
     max-width: 1000px;
-}
-
-.main-logo {
-    margin-top: 1%;
-    width: 220px;
 }
 
 #onlineshop {
@@ -48,6 +46,10 @@ fieldset legend {
     background-image: none !important;
 }
 
+a:hover.persona-button {
+    color: white;
+}
+
 @media only screen and (max-width:760px) {
     #wrapper {
         width: 98%;
@@ -62,15 +64,129 @@ fieldset legend {
     }
 }
 
+
+/* Navigation
+==================== */
+
+.main-logo {
+    width: 130px;
+}
+
+#nav-main {
+    float: right;
+    position: relative;
+    font-size: 14px;
+    margin: 3px 0;
+}
+
+#navigation {
+    padding: 5px;
+    height: 40px;
+    display: block;
+    margin-right: 16px;
+    float: none;
+}
+
+ul.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: -15px;
+    background-color: @white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border-shadow: 0px 0px 2px rgba(0, 2px, 2px, 0.2);
+    min-width: 150px;
+    margin: 5px 0 0 0;
+    z-index: 1000;
+    display: none;
+}
+
+ul.dropdown-menu > li {
+    overflow: hidden;
+    display: block;
+    line-height: 32px;
+    margin: 0;
+}
+
+
+ul.dropdown-menu > li > a {
+    clear: both;
+    display: block;
+    line-height: 32px;
+    padding: 3px 20px 3px 10px;
+    white-space: nowrap;
+    min-width: 150px;
+}
+
+ul.dropdown-menu > li > a:hover {
+    background-color: #149FEE;
+    color: white;
+}
+
+#hamburger-button {
+    display:none;
+}
+
+@media only screen and (max-width:760px) {
+    #hamburger-button {
+        display: inline;
+        float: left;
+        margin-right: 10px;
+    }
+
+    .dropdown-toggle {
+        display: none;
+    }
+
+    .main-logo {
+        width: 80px;
+        float: right;
+        margin-top: 5px;
+    }
+
+    #nav-main {
+        float: left;
+        position: relative;
+        font-size: 14px;
+        margin: 3px 0;
+    }
+
+    ul.dropdown-menu {
+        position: absolute;
+        top: 20px;
+        left: -40px;
+        background-color: @white;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        border-shadow: 0px 0px 2px rgba(0, 2px, 2px, 0.2);
+        min-width: 150px;
+        margin: 5px 0 0 0;
+        z-index: 1000;
+        display: none;
+    }
+}
+
+
+/* Footer
+==================== */
+
 #colophon {
-  background-color: #CD5F5A;
-  color: #eee;
+    background-color: #CD5F5A;
+    color: #eee;
 }
 
 #colophon .footer-logo img {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
-#colophon a:hover, #colophon a:active, #colophon a:focus {
-  color: #76D3FF !important;
+#colophon a:link,
+#colophon a:active,
+#colophon a:focus,
+#colophon a:visited {
+    color: white;
+    text-decoration: underline;
+}
+
+#colophon a:hover {
+    color: lightgray;
 }
