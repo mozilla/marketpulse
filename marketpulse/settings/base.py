@@ -172,5 +172,6 @@ MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
 MOZILLIANS_API_KEY = config('MOZILLIANS_API_KEY', default=None)
 
 # Mapbox API
+MAPBOX_GEOCODE_URL = 'https://api.tiles.mapbox.com/v4/geocode/mapbox.places/'
 MAPBOX_MAP_ID = config('MAPBOX_MAP_ID', default=None)
 MAPBOX_TOKEN = config('MAPBOX_TOKEN', default=None)
