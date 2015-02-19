@@ -1,3 +1,5 @@
+from urlparse import urlparse
+
 from django import forms
 
 from marketpulse.geo.lookup import reverse_geocode
@@ -22,13 +24,20 @@ class LocationForm(forms.ModelForm):
 
     def clean(self):
         cdata = super(LocationForm, self).clean()
+        url = cdata.get('link')
         if cdata['is_online']:
             if not cdata['country']:
                 msg = 'Please provide a country'
                 self._errors['country'] = self.error_class([msg])
-            if not cdata['link']:
+            if not url:
                 msg = 'Please provide a URL'
                 self._errors['link'] = self.error_class([msg])
+
+        if url and not urlparse(url).scheme:
+            url = 'http://' + url
+            cdata['link'] = url
+
+        return cdata
 
     def save(self, commit=True):
         instance = super(LocationForm, self).save(commit=False)
