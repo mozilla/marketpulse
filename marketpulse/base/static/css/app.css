@@ -3,6 +3,8 @@
 
 .container {
     max-width: 1000px;
+    margin-top: 15px;
+}
 }
 
 #onlineshop {
@@ -62,13 +64,22 @@ a:hover.persona-button {
     h2.title {
         text-align: center;
     }
+
+    .container {
+        margin-top: 0px;
+    }
 }
+
 
 /* Navigation
 ==================== */
 
 .main-logo {
     width: 130px;
+}
+
+.mobile-logo {
+    display: none;
 }
 
 #nav-main {
@@ -126,9 +137,9 @@ ul.dropdown-menu > li > a:hover {
     display:none;
 }
 
-@media only screen and (max-width:760px) {
+@media only screen and (max-width:768px) {
     #hamburger-button {
-        display: inline;
+        display: none;
         float: left;
         margin-right: 10px;
     }
@@ -138,9 +149,13 @@ ul.dropdown-menu > li > a:hover {
     }
 
     .main-logo {
-        width: 80px;
-        float: right;
-        margin-top: 5px;
+        display: none;
+    }
+
+    .mobile-logo {
+        display: inline-block;
+        width: 200px;
+        margin-bottom: 10px
     }
 
     #nav-main {
@@ -165,8 +180,10 @@ ul.dropdown-menu > li > a:hover {
     }
 }
 
+
 /* Form errors
 ==================== */
+
 small.error {
     margin: 0 0 20px 0;
     background-color: #c00000;

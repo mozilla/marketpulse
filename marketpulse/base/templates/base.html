@@ -59,6 +59,12 @@
         </header>
 
         <div class="container">
+          <div class="text-center">
+            <a href="{{ url('main:home') }}">
+              <img class="mobile-logo" src="{{ static('img/marketpulse.png') }}" alt="Marketpulse">
+            </a>
+          </div>
+
           {% block content %}
           {% endblock %}
         </div>
