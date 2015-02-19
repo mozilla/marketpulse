@@ -1,13 +1,16 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
+from django.core.urlresolvers import reverse
 
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
 from marketpulse.main.models import Activity, Contribution
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return redirect(reverse('main:edit_fxosprice'))
     return render(request, 'home.html')
 
 

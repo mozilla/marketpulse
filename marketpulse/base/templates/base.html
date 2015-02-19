@@ -35,15 +35,11 @@
           <div id="navigation" role="navigation">
             <a id="hamburger-button" href="#"><img src="{{ static('img/hamburger.png') }}" /></a>
 
-            <a href="{{ url('main:home') }}">
-              <img class="main-logo" src="{{ static('img/marketpulse.png') }}" alt="Marketpulse">
-            </a>
-
-            <div id="nav-main">
-              {% if user.is_authenticated() %}
+            {% if user.is_authenticated() %}
+              <div id="nav-main">
                 <a href="#" class="dropdown-toggle">
                   <span class="username">
-                  {{ user.email }}
+                    {{ user.email }}
                   </span>
                 </a>
                 <ul class="dropdown-menu" id="dropdown-menu">
@@ -51,14 +47,18 @@
                     {{ browserid_logout(text='Logout') }}
                   </li>
                 </ul>
-              {% else %}
-                {{ browserid_login(text='Login', color='dark') }}
-              {% endif %}
-            </div>
+              </div>
+            {% endif %}
           </nav>
         </header>
 
         <div class="container">
+          <div class="text-center">
+            <a href="{{ url('main:home') }}">
+              <img class="main-logo" src="{{ static('img/marketpulse.svg') }}" alt="Marketpulse">
+            </a>
+          </div>
+
           {% block content %}
           {% endblock %}
         </div>

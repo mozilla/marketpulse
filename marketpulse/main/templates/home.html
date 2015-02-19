@@ -3,10 +3,23 @@
 {% block content %}
   <div class="row">
     <div class="col-md-12">
-      Cupcake ipsum dolor sit amet donut chocolate bar cake biscuit.
-      Donut cheesecake donut apple pie cupcake fruitcake dragée gummi bears.
-      Caramels apple pie powder muffin sweet roll.
-      Fruitcake sesame snaps cake marzipan chocolate sugar plum cake lollipop bonbon.
+
+      <div class="text-center">
+        <img class="main-image" src="{{ static('img/firefox_os_team.jpg') }}" alt="">
+      </div>
+
+      <div class="jumbotron">
+        <p>
+          Marketpulse is a community tool designed by Mozilla's Participation team to help
+          Mozillians easily gather local  market data and update a central dashboard used by
+          the Fx OS team to effectively monitor the reality on the ground and gain
+          in-depth market knowledge.
+        </p>
+        <p class="text-center" id="login">
+          {{ browserid_login(text='Login with Persona', color='dark') }}
+        </p>
+      </div>
+
     </div>
   </div>
 {% endblock %}
