@@ -1,5 +1,6 @@
 from django import forms
 
+from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main.models import Contribution, Location
 
 
@@ -28,3 +29,15 @@ class LocationForm(forms.ModelForm):
             if not cdata['link']:
                 msg = 'Please provide a URL'
                 self._errors['link'] = self.error_class([msg])
+
+    def save(self, commit=True):
+        instance = super(LocationForm, self).save(commit=False)
+        location_data = reverse_geocode(instance.lat, instance.lng)
+
+        for attr in ['country', 'region', 'city', 'address']:
+            setattr(instance, attr, location_data.get(attr, ''))
+
+        if commit:
+            instance.save()
+
+        return instance
