@@ -1,11 +1,14 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.loader import render_to_string
+from django.template.defaultfilters import timesince, pluralize
 
 from jingo import register
 from jinja2 import Markup
 
 
 static = register.function(static)
+register.filter(timesince)
+register.filter(pluralize)
 
 
 @register.function
