@@ -162,7 +162,8 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 AUTH_USER_MODEL = 'mozillians_auth.User'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
                            '%s.auth.backend.MozilliansAuthBackendLegacy' % PROJECT_MODULE)
-BROWSERID_VERIFY_CLASS = '%s.auth.backend.BrowserIDVerify' % PROJECT_MODULE
+BROWSERID_VERIFY_CLASS = '%s.auth.views.BrowserIDVerify' % PROJECT_MODULE
+
 BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
