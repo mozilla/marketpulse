@@ -59,6 +59,18 @@
             </a>
           </div>
 
+          {% if messages %}
+            <div class="row">
+              <div class="col-md-12">
+                {% for notification in messages %}
+                  <div class="alert alert-{{ notification.tags }}" role="alert">
+                    {{ notification.message }}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endif %}
+
           {% block content %}
           {% endblock %}
         </div>
