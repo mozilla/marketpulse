@@ -8,7 +8,7 @@
 {% block content %}
   <h2 class="title">Firefox OS prices</h2>
 
-  {% if location_form.errors or contribution_form.error %}
+  {% if location_form.errors or contribution_form.errors or plan_formset.errors %}
     <div class="row messages">
       <div class="col-md-12">
         <div class="alert alert-danger" role="alert">
@@ -23,7 +23,6 @@
 
     <div class="row">
       <div class="col-md-6">
-
         <fieldset>
           <legend>Shop</legend>
           <div class="form-group switch">
