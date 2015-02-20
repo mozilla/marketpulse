@@ -24,11 +24,17 @@
 .main-logo {
     width: 200px;
     margin-bottom: 10px
+    float: left;
+    margin-top: 1px;
 }
 
 .main-image {
     border-radius: 10px;
     margin-top: 10px;
+}
+
+.mobile-logo {
+    display: none;
 }
 
 #login {
@@ -115,6 +121,16 @@ a:focus.persona-button {
     .alert {
         margin-bottom: 10px;
     }
+
+    .mobile-logo {
+        width: 200px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+    .main-logo {
+        display: none;
+    }
 }
 
 
@@ -179,7 +195,7 @@ ul.dropdown-menu > li > a:hover {
 
 @media only screen and (max-width:768px) {
     #hamburger-button {
-        display: none;
+        display: inline-block;
         float: left;
         margin-right: 10px;
     }
