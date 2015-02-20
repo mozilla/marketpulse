@@ -161,7 +161,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Django-browserid settings
 AUTH_USER_MODEL = 'mozillians_auth.User'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-                           '%s.auth.backend.MozilliansAuthBackend' % PROJECT_MODULE)
+                           '%s.auth.backend.MozilliansAuthBackendLegacy' % PROJECT_MODULE)
 BROWSERID_VERIFY_CLASS = '%s.auth.backend.BrowserIDVerify' % PROJECT_MODULE
 BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
 LOGIN_REDIRECT_URL = '/'
@@ -170,6 +170,7 @@ LOGIN_REDIRECT_URL_FAILURE = '/'
 # Mozillians.org API settings
 MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
 MOZILLIANS_API_KEY = config('MOZILLIANS_API_KEY', default=None)
+MOZILLIANS_APP_NAME = config('MOZILLIANS_APP_NAME', default=None)
 
 # Mapbox API
 MAPBOX_GEOCODE_URL = 'https://api.tiles.mapbox.com/v4/geocode/mapbox.places/'

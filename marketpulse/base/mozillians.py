@@ -101,3 +101,44 @@ class MozilliansClient():
         """Check users vouched status based on email."""
         user = self.lookup_user({'email': email}, detailed=False)
         return (user, user['is_vouched'])
+
+
+class MozilliansClientLegacy():
+    def __init__(self, api_base_url, api_key, app_name):
+
+        # Validate api_base_url
+        o = urlparse(api_base_url)
+        if all([o.scheme in ['http', 'https'], o.netloc, o.path.startswith('/api/v1')]):
+            self.base_url = api_base_url
+        else:
+            raise Exception('Invalid API base URL.')
+
+        self.params = {'app_name': app_name,
+                       'app_key': api_key,
+                       'format': 'json'}
+
+    def get(self, url, params=None):
+        """GET url, checks status code and return json response."""
+        params.update(self.params)
+        response = requests.get(url, params=params)
+
+        if not response.status_code == 200:
+            raise BadStatusCode('{0} on: {1}'.format(response.status_code, url))
+
+        return response.json()
+
+    def _get_resource_url(self, resource):
+        """Build Mozillians.org API resource url."""
+        return urljoin(self.base_url, resource)
+
+    def email_lookup(self, email):
+        params = {'email': email}
+        url = self._get_resource_url('users')
+        response = self.get(url, params=params)
+
+        if response['meta']['total_count'] == 0:
+            raise ResourceDoesNotExist()
+        if response['meta']['total_count'] > 1:
+            raise MultipleResourcesReturned()
+
+        return response['objects'][0]
