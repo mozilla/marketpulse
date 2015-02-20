@@ -215,10 +215,10 @@ ul.dropdown-menu > li > a:hover {
 ==================== */
 
 small.error {
-    margin: 0 0 20px 0;
-    background-color: #c00000;
-    border-color: #c00000;
-    color: #fff;
+    color: #c00000;
+    position: relative;
+    top: -10px;
+    left: 0px;
 }
 
 
