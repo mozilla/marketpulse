@@ -1,6 +1,7 @@
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.template.loader import render_to_string
 from django.template.defaultfilters import timesince, pluralize
+from django.conf import settings
 
 from jingo import register
 from jinja2 import Markup
@@ -26,3 +27,8 @@ def field_with_attrs(bfield, **kwargs):
 def field_errors(field):
     """Return string with rendered template with field errors."""
     return Markup(render_to_string('form-error.html', {'field': field}))
+
+
+@register.function
+def get_full_url(path):
+    return '{0}{1}'.format(settings.SITE_URL, path)

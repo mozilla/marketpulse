@@ -44,4 +44,21 @@ jQuery(document).ready(function ($) {
     $("a.close").on("click", function(e) {
         $(this).parent().fadeOut();
     });
+
+
+    /* Webapp manifest */
+
+    $("#webapp").click(function() {
+        var manifest = $(this).data("manifest");
+        var request = window.navigator.mozApps.install(manifest);
+
+        request.onsuccess = function () {
+            var appRecord = this.result;
+        };
+
+        request.onerror = function () {
+            alert("Install failed, error: " + this.error.name);
+            console.log(this);
+        };
+    });
 });
