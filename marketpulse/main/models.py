@@ -1,5 +1,6 @@
-from django.conf import settings
 from django.db import models
+from django.conf import settings
+from django.core.validators import MinValueValidator
 
 from django_countries.fields import CountryField
 from uuslug import uuslug
@@ -75,7 +76,7 @@ class Plan(models.Model):
     has_plan = models.BooleanField(default=False)
     duration = models.PositiveIntegerField(blank=True, null=True)
     description = models.TextField(default='', blank=True)
-    amount = models.PositiveIntegerField(blank=True, null=True)
+    amount = models.FloatField(blank=True, null=True, validators=[MinValueValidator(0.0)])
     currency = models.CharField(max_length=128, choices=get_currency_choices(), default='')
     carrier = models.ForeignKey(Carrier, related_name='carriers', null=True, blank=True)
-    monthly_fee = models.PositiveIntegerField(blank=True, null=True)
+    monthly_fee = models.FloatField(blank=True, null=True, validators=[MinValueValidator(0.0)])

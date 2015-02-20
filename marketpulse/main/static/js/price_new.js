@@ -7,6 +7,7 @@ $(document).ready(function() {
             deleteText: "Remove price",
             addCssClass: "btn btn-default",
             addText: "Add another price",
+            deleteCssClass: "btn btn-default"
       });
     });
 
