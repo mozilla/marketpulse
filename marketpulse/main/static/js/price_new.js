@@ -1,9 +1,13 @@
 $(document).ready(function() {
     "use strict";
 
-    $("#planprices-addfield").click(function() {
-        $(".planprices:first").clone().appendTo("#fieldset-planprices");
-        return false;
+    $(function() {
+        $(".planprices").formset({
+            prefix: "plans",
+            deleteText: "Remove price",
+            addCssClass: "btn btn-default",
+            addText: "Add another price",
+      });
     });
 
     function displayLocationForm () {

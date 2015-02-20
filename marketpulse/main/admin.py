@@ -4,7 +4,7 @@ from django_countries import countries
 from import_export import fields, resources
 from import_export.admin import ExportMixin
 
-from marketpulse.main.models import Activity, Contribution, Location, Plan, Price
+from marketpulse.main.models import Activity, Carrier, Contribution, Location, Plan
 
 
 class ActivityResource(resources.ModelResource):
@@ -33,13 +33,6 @@ class ContributionResource(resources.ModelResource):
         return ''
 
 
-class PriceResource(resources.ModelResource):
-    class Meta:
-        model = Price
-        fields = ('id', 'contribution__id', 'plan__has_plan', 'plan__duration',
-                  'plan__description', 'amount', 'currency')
-
-
 @admin.register(Activity)
 class ActivityAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = ActivityResource
@@ -52,19 +45,14 @@ class LocationAdmin(ExportMixin, admin.ModelAdmin):
     list_display = ('shop_name', 'link', 'address')
 
 
+@admin.register(Carrier)
+class CarrierAdmin(ExportMixin, admin.ModelAdmin):
+    list_display = ('name', 'parent_operator', 'country')
+
+
 @admin.register(Plan)
 class PlanAdmin(admin.ModelAdmin):
-    list_display = ('description', 'duration', 'has_plan')
-
-
-class PriceInline(admin.StackedInline):
-    model = Price
-
-
-@admin.register(Price)
-class PriceAdmin(ExportMixin, admin.ModelAdmin):
-    resource_class = PriceResource
-    list_display = ('amount', 'currency')
+    list_display = ('contribution', 'amount', 'has_plan', 'duration', 'has_plan')
 
 
 @admin.register(Contribution)
@@ -72,4 +60,3 @@ class ContributionAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = ContributionResource
     list_display = ('user', 'activity', 'created_on')
     readonly_fields = ('created_on', 'updated_on')
-    inlines = [PriceInline]

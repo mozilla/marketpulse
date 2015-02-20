@@ -1,10 +1,12 @@
 from django.conf import settings
 from django.db import models
 
+from django_countries.fields import CountryField
 from uuslug import uuslug
 
 from marketpulse.devices.models import Device
 from marketpulse.geo.models import LocationBase
+from marketpulse.main import get_currency_choices
 
 
 class Activity(models.Model):
@@ -41,32 +43,38 @@ class Location(LocationBase):
         return '{0}, {1}'.format(self.shop_name, self.country)
 
 
-class Plan(models.Model):
-    """Mobile phone plan information."""
-
-    has_plan = models.BooleanField(default=False)
-    duration = models.IntegerField(default=None)
-    description = models.TextField(default='', blank=True)
-
-
 class Contribution(models.Model):
     """Model for contribution data."""
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='contributions')
     activity = models.ForeignKey(Activity, related_name='contributions')
-    location = models.ForeignKey(Location, related_name='contributions')
-    device = models.ForeignKey(Device, related_name='contributions')
+    location = models.ForeignKey(Location, related_name='contributions', null=True)
+    device = models.ForeignKey(Device, related_name='contributions', null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     comment = models.TextField(blank=True, default='')
     availability = models.BooleanField(default=True)
-    plan = models.ManyToManyField(Plan, through='Price', null=True, default=None)
+
+    def __unicode__(self):
+        return '{0}, {1}'.format(self.user, self.activity)
 
 
-class Price(models.Model):
-    """Mobile phone price model."""
+class Carrier(models.Model):
+    name = models.CharField(max_length=128)
+    parent_operator = models.CharField(max_length=128, blank=True, default='')
+    country = CountryField(null=True, blank=True)
 
-    contribution = models.ForeignKey(Contribution)
-    plan = models.ForeignKey(Plan)
-    amount = models.IntegerField()
-    currency = models.CharField(max_length=3, choices=[])
+    def __unicode__(self):
+        return self.name
+
+
+class Plan(models.Model):
+    """Mobile phone plan information."""
+
+    contribution = models.ForeignKey(Contribution, related_name='plans', null=True)
+    has_plan = models.BooleanField(default=False)
+    duration = models.PositiveIntegerField(blank=True, null=True)
+    description = models.TextField(default='', blank=True)
+    amount = models.PositiveIntegerField(blank=True, null=True)
+    currency = models.CharField(max_length=128, choices=get_currency_choices(), default='')
+    carrier = models.ForeignKey(Carrier, related_name='carriers', null=True, blank=True)

@@ -1,9 +1,10 @@
 from urlparse import urlparse
 
 from django import forms
+from django.forms.models import BaseInlineFormSet, inlineformset_factory
 
 from marketpulse.geo.lookup import reverse_geocode
-from marketpulse.main.models import Contribution, Location
+from marketpulse.main.models import Contribution, Location, Plan
 
 
 class ContributionForm(forms.ModelForm):
@@ -50,3 +51,33 @@ class LocationForm(forms.ModelForm):
             instance.save()
 
         return instance
+
+
+class BasePlanFormset(BaseInlineFormSet):
+
+    def clean(self):
+        """Clean formset."""
+
+        if any(self.errors):
+            return
+
+        for i, form in enumerate(self.forms):
+            has_plan = form.cleaned_data.get('has_plan')
+            amount = form.cleaned_data.get('amount')
+            duration = form.cleaned_data.get('duration')
+            carrier = form.cleaned_data.get('carrier')
+
+            if has_plan:
+                if not duration:
+                    msg = 'Please provide the duration of this plan'
+                    self._errors[i]['duration'] = self.error_class([msg])
+                if not carrier:
+                    msg = 'Please provide the carrier for this plan'
+                    self._errors[i]['carrier'] = self.error_class([msg])
+            if not has_plan and not amount:
+                msg = 'Please enter the price of this device'
+                self._errors[i]['amount'] = self.error_class([msg])
+
+
+PlanFormset = inlineformset_factory(Contribution, Plan, formset=BasePlanFormset,
+                                    extra=1, can_delete=False)

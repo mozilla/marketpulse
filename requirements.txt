@@ -122,3 +122,6 @@ python-slugify==0.1.0
 unidecode==0.04.17
 # sha256: elP18QMPvIHxfOqAVbu049lOKUiX5uaA_DZXImEio7A
 django-countries==3.1.1
+# sha256: Bs6mC_-9uBFmiNMF6NZFosMr7viNMQ2bMjgv1D7fiOY
+# sha256: 9EeX7QFH-561HGXU9xXA8Cycdy24QBGGuEvfn7AqSwU
+py-moneyed==0.5.0

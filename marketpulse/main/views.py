@@ -27,20 +27,26 @@ def edit_fxosprice(request, username='', id=None):
 
     contribution_form = forms.ContributionForm(request.POST or None, instance=contribution)
     location_form = forms.LocationForm(request.POST or None)
+    plan_formset = forms.PlanFormset(request.POST or None, instance=contribution)
 
-    if location_form.is_valid() and contribution_form.is_valid():
+    if location_form.is_valid() and contribution_form.is_valid() and plan_formset.is_valid():
         location = location_form.save()
         obj = contribution_form.save(commit=False)
         obj.location = location
         obj.save()
+        plan_formset.save()
 
         messages.success(request, 'Contribution successfully saved')
+        contribution_form = forms.ContributionForm()
+        location_form = forms.LocationForm()
+        plan_formset = forms.PlanFormset()
 
         return redirect(reverse('main:activities'))
 
     return render(request, 'fxosprice_new.html',
                   {'contribution_form': contribution_form,
                    'location_form': location_form,
+                   'plan_formset': plan_formset,
                    'mapbox_id': settings.MAPBOX_MAP_ID,
                    'mapbox_token': settings.MAPBOX_TOKEN})
 
