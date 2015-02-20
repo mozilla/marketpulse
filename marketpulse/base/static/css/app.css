@@ -35,6 +35,11 @@
     display: block;
 }
 
+h2.title,
+h3.title {
+    text-align: center;
+}
+
 #onlineshop {
     display: none;
 }
@@ -89,10 +94,6 @@ a:focus.persona-button {
 
     .row {
         margin-left: -15px;
-    }
-
-    h2.title {
-        text-align: center;
     }
 
     .container {
@@ -206,6 +207,30 @@ small.error {
     background-color: #c00000;
     border-color: #c00000;
     color: #fff;
+}
+
+
+/* Activities
+==================== */
+
+#activities-titles {
+    padding: 20px;
+}
+
+#activities-titles h2,
+#activities-titles h3 {
+    text-align: center;
+}
+
+.view-all {
+    display:inline-block;
+    margin-top: 5px;
+}
+
+@media only screen and (max-width:760px) {
+    #activities-titles {
+        padding: 0px 20px;
+    }
 }
 
 
