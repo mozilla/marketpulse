@@ -24,7 +24,7 @@ class ContributionResource(resources.ModelResource):
         model = Contribution
         fields = ('user__id', 'user__first_name', 'user__last_name', 'activity__id',
                   'activity__name', 'location__region', 'location__city', 'location__lat',
-                  'location__lng', 'device__name', 'device__model', 'device__manufacturer',
+                  'location__lng', 'device__model', 'device__manufacturer',
                   'created_on', 'updated_on', 'comment', 'availability')
 
     def dehydrate_country(self, contribution):

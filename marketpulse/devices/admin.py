@@ -4,6 +4,6 @@ from marketpulse.devices.models import Device
 
 
 class DeviceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'model', 'manufacturer')
+    list_display = ('model', 'manufacturer')
 
 admin.site.register(Device, DeviceAdmin)
