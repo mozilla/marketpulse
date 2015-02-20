@@ -40,6 +40,10 @@ h3.title {
     text-align: center;
 }
 
+.messages {
+    margin-top: 15px;
+}
+
 #onlineshop {
     display: none;
 }
@@ -102,6 +106,14 @@ a:focus.persona-button {
 
     .main-image {
         border-radius: 5px;
+    }
+
+    .messages {
+        margin-top: 5px;
+    }
+
+    .alert {
+        margin-bottom: 10px;
     }
 }
 
