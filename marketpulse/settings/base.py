@@ -68,11 +68,22 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 ROOT_URLCONF = '%s.urls' % PROJECT_MODULE
 
@@ -162,7 +173,8 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 AUTH_USER_MODEL = 'mozillians_auth.User'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
                            '%s.auth.backend.MozilliansAuthBackendLegacy' % PROJECT_MODULE)
-BROWSERID_VERIFY_CLASS = '%s.auth.backend.BrowserIDVerify' % PROJECT_MODULE
+BROWSERID_VERIFY_CLASS = '%s.auth.views.BrowserIDVerify' % PROJECT_MODULE
+
 BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'

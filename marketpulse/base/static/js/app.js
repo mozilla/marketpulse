@@ -38,4 +38,10 @@ jQuery(document).ready(function ($) {
         expandNavMenu(e);
     });
 
+
+    /* Messages */
+
+    $("a.close").on("click", function(e) {
+        $(this).parent().fadeOut();
+    });
 });
