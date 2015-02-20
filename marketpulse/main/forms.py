@@ -66,6 +66,7 @@ class BasePlanFormset(BaseInlineFormSet):
             amount = form.cleaned_data.get('amount')
             duration = form.cleaned_data.get('duration')
             carrier = form.cleaned_data.get('carrier')
+            monthly_fee = form.cleaned_data.get('monthly_fee')
 
             if has_plan:
                 if not duration:
@@ -74,6 +75,9 @@ class BasePlanFormset(BaseInlineFormSet):
                 if not carrier:
                     msg = 'Please provide the carrier for this plan'
                     self._errors[i]['carrier'] = self.error_class([msg])
+                if not monthly_fee:
+                    msg = 'Please enter the monthly fee for this plan'
+                    self._errors[i]['monthly_fee'] = self.error_class([msg])
             if not has_plan and not amount:
                 msg = 'Please enter the price of this device'
                 self._errors[i]['amount'] = self.error_class([msg])
