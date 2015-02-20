@@ -64,7 +64,7 @@
           </div>
           {{ field_errors(contribution_form.device) }}
           <div class="form-group switch">
-            <label for="id_availability">Purchase availability</label>
+            <label for="id_availability">In stock</label>
             <label class="pack-switch">
               {{ contribution_form.availability }}
               <span></span>
@@ -74,7 +74,7 @@
       </div>
       <div class="col-md-6">
         <fieldset>
-          <legend>Prices</legend>
+          <legend>Device Prices</legend>
           <div id="fieldset-planprices">
             <div class="form-group planprices">
               {% for plan_form in plan_formset %}
@@ -88,7 +88,7 @@
                 </div>
                 <div class="row">
                   <div class="col-xs-8">
-                    {{ field_with_attrs(plan_form.amount, placeholder="Price") }}
+                    {{ field_with_attrs(plan_form.amount, placeholder="Device Price") }}
                     {{ field_errors(plan_form.amount) }}
                   </div>
                   <div class="col-xs-4">
@@ -103,7 +103,12 @@
                   {{ field_errors(plan_form.carrier) }}
                 </div>
                 <div class="form-group hasplan">
-                  {{ field_with_attrs(plan_form.description, placeholder="Plan name") }}
+                  <label></label>
+                  {{ field_with_attrs(plan_form.monthly_fee, placeholder="Monthly fee") }}
+                  {{ field_errors(plan_form.monthly_fee) }}
+                </div>
+                <div class="form-group hasplan">
+                  {{ field_with_attrs(plan_form.description, placeholder="Plan description") }}
                   {{ field_errors(plan_form.description) }}
                 </div>
                 <div class="form-group hasplan">

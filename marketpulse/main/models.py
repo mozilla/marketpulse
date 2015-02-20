@@ -78,3 +78,4 @@ class Plan(models.Model):
     amount = models.PositiveIntegerField(blank=True, null=True)
     currency = models.CharField(max_length=128, choices=get_currency_choices(), default='')
     carrier = models.ForeignKey(Carrier, related_name='carriers', null=True, blank=True)
+    monthly_fee = models.PositiveIntegerField(blank=True, null=True)
