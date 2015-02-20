@@ -6,7 +6,10 @@
       <h2>{{ total_contributions }} Contribution{{ total_contributions|pluralize }}</h2>
     </div>
     <div class="col-md-6">
-      <h3>{{ percent }}% of all the contributions</h3>
+      <h4 class="text-center">
+        you have contributed {{ percent }}%<br>
+        of all the contributions
+      </h3>
     </div>
   </div>
 
@@ -21,6 +24,14 @@
   <div class="row">
     <div class="col-md-12 text-right">
       <a href="{{ url('main:all_fxosprice') }}" class="view-all">View all &gt;&gt;</a>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row text-center">
+    <div class="col-md-12">
+      More marketpulse activities coming soon
     </div>
   </div>
 {% endblock %}

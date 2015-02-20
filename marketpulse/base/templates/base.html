@@ -33,9 +33,13 @@
           </div>
 
           <div id="navigation" role="navigation">
-            <a id="hamburger-button" href="#"><img src="{{ static('img/hamburger.png') }}" /></a>
-
             {% if user.is_authenticated() %}
+              <a id="hamburger-button" href="#"><img src="{{ static('img/hamburger.png') }}" /></a>
+
+              <a href="{{ url('main:home') }}">
+                <img class="main-logo" src="{{ static('img/marketpulse.svg') }}" alt="Marketpulse">
+              </a>
+
               <div id="nav-main">
                 <a href="#" class="dropdown-toggle">
                   <span class="username">
@@ -55,9 +59,16 @@
         <div class="container">
           <div class="text-center">
             <a href="{{ url('main:home') }}">
-              <img class="main-logo" src="{{ static('img/marketpulse.svg') }}" alt="Marketpulse">
+              <img class="mobile-logo" src="{{ static('img/marketpulse.svg') }}" alt="Marketpulse">
             </a>
           </div>
+          {% if not user.is_authenticated() %}
+            <div class="text-center">
+              <a href="{{ url('main:home') }}">
+                <img class="main-logo" src="{{ static('img/marketpulse.svg') }}" alt="Marketpulse">
+              </a>
+            </div>
+          {% endif %}
 
           {% if messages %}
             <div class="row messages">
