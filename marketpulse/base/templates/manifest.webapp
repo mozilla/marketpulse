@@ -1,10 +1,10 @@
 {
-    "name": "Mozilla Marketpulse",
+    "name": "Marketpulse",
     "description": "Web app to help gather local market data for Firefox OS",
     "icons": {
-        "64": "/img/icon-64.png",
-        "128": "/img/icon-128.png",
-        "512": "/img/icon-512.png"
+        "64": "/static/img/icon-64.png",
+        "128": "/static/img/icon-128.png",
+        "512": "/static/img/icon-512.png"
     },
     "developer": {
         "name": "Mozilla",
