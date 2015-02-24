@@ -83,7 +83,9 @@
             <div class="form-group planprices">
               {% for plan_form in plan_formset %}
                 <div class="form-group switch">
-                  <label>Is this a plan?</label>
+                  <label for="id_{{ plan_form.prefix}}-has_plan">
+                    Does this price come with a plan?
+                  </label>
                   <label class="pack-switch">
                     {{ field_with_attrs(plan_form.has_plan, class="hasplan-check") }}
                     <span></span>
