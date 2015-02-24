@@ -83,7 +83,7 @@ def activities(request):
         percent = 0
     return render(request, 'activities.html',
                   {'user': request.user,
-                   'total_contributions': total_contributions,
+                   'user_contributions': user_contributions,
                    'percent': percent})
 
 
