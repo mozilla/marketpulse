@@ -26,6 +26,23 @@ $(document).ready(function() {
         $('#location-text').html('Click on map for adjusting location.');
         $('#id_lat').val(e.latlng.lat);
         $('#id_lng').val(e.latlng.lng);
+
+        var data = {
+            'longitude': e.latlng.lng,
+            'latitude': e.latlng.lat
+        };
+
+        $.ajax({
+            url: '/fxosprice/new/',
+            type: 'GET',
+            dataType: 'json',
+            data: data,
+            success: function(json) {
+                if (json.country !== null) {
+                    $('#id_country').val(json.country);
+                }
+            }
+        });
     });
 
     map.on('click', function(e) {
