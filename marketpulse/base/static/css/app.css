@@ -261,6 +261,9 @@ small.error {
     left: 0px;
 }
 
+select.form-control + small.error {
+    top: 0px;
+}
 
 /* Activities
 ==================== */

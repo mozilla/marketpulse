@@ -24,15 +24,20 @@ $(document).ready(function() {
     }
 
     $(document).on('click', '.hasplan-check', function () {
-        var n = $(this.checked).length;
+        var choice = $(this).closest('.switch').nextAll('.hasplan').slice(0, 4);
 
-        if (n === 0) {
-            $(this).closest('.planprices').find('.hasplan').hide();
+        if (this.checked) {
+            choice.show();
         } else {
-            $(this).closest('.planprices').find('.hasplan').show();
+            choice.hide();
         }
     });
 
+    // Show location form if contribution is online
     $('#id_is_online').on('change', displayLocationForm);
+
+    // Show checked formsets on load
+    $('.hasplan-check:checked').closest('.switch').nextAll('.hasplan').slice(0, 4).show();
+
     displayLocationForm();
 });
