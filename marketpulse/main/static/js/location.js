@@ -41,6 +41,9 @@ $(document).ready(function() {
                 if (json.country !== null) {
                     $('#id_country').val(json.country);
                 }
+                if (json.currency !== null) {
+                    $('.formset-currency').val(json.currency);
+                }
             }
         });
     });

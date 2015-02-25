@@ -7,7 +7,8 @@ $(document).ready(function() {
             deleteText: 'Remove price',
             addCssClass: 'btn btn-default',
             addText: 'Add another price',
-            deleteCssClass: 'btn btn-default'
+            deleteCssClass: 'btn btn-default',
+            added: changeCurrency,
       });
     });
 
@@ -21,6 +22,11 @@ $(document).ready(function() {
             $('#location').show();
             $('#onlineshop').hide();
         }
+    }
+
+    function changeCurrency () {
+        var currency = $('.formset-currency:first').val();
+        $('.formset-currency:not(:first)').val(currency);
     }
 
     $(document).on('click', '.hasplan-check', function () {
