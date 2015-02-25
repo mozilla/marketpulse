@@ -7,8 +7,9 @@ $(document).ready(function() {
             deleteText: 'Remove price',
             addCssClass: 'btn btn-default',
             addText: 'Add another price',
-            deleteCssClass: 'btn btn-default',
-            added: changeCurrency,
+            deleteCssClass: 'btn btn-default price-remove',
+            added: addPrice,
+            removed: removePrice
       });
     });
 
@@ -24,9 +25,26 @@ $(document).ready(function() {
         }
     }
 
-    function changeCurrency () {
+    function displayRemovePriceBtn() {
+        var price_remove_btn = $('.price-remove');
+        if ($('.planprices').length > 1) {
+            price_remove_btn.show();
+        } else {
+            price_remove_btn.hide();
+        }
+    }
+
+    function addPrice () {
+        // Prepopulate currency with geocoding data
         var currency = $('.formset-currency:first').val();
         $('.formset-currency:not(:first)').val(currency);
+
+        // Show price-remove button
+        displayRemovePriceBtn();
+    }
+
+    function removePrice () {
+        displayRemovePriceBtn();
     }
 
     $(document).on('click', '.hasplan-check', function () {
@@ -41,9 +59,11 @@ $(document).ready(function() {
 
     // Show location form if contribution is online
     $('#id_is_online').on('change', displayLocationForm);
+    displayLocationForm();
 
     // Show checked formsets on load
     $('.hasplan-check:checked').closest('.switch').nextAll('.hasplan').slice(0, 4).show();
 
-    displayLocationForm();
+    // Show/Hide price formset remove button
+    $('.price-remove').ready(displayRemovePriceBtn);
 });
