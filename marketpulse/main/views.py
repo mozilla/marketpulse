@@ -7,6 +7,9 @@ from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 
+import moneyed
+from django_countries import countries
+
 from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
 from marketpulse.main.models import Activity, Contribution
@@ -23,14 +26,24 @@ def edit_fxosprice(request, username='', id=None):
     user = request.user
 
     if request.is_ajax():
-        country_code = None
         lat = request.GET.get('latitude')
         lng = request.GET.get('longitude')
 
-        if lat and lng:
-            location_data = reverse_geocode(lat, lng)
-            country_code = location_data.get('country')
-        return JsonResponse({'country': country_code})
+        data = {'country': None,
+                'currency': None}
+
+        location_data = reverse_geocode(lat, lng)
+        country_code = location_data.get('country')
+        if country_code:
+            data['country'] = country_code
+            country_name = dict(countries)[country_code]
+
+            for currency, currency_data in moneyed.CURRENCIES.items():
+                if country_name.upper() in currency_data.countries:
+                    data['currency'] = currency
+                    break
+
+        return JsonResponse(data)
 
     if not id:
         activity = Activity.objects.get(name=FFXOS_ACTIVITY_NAME)
