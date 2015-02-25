@@ -1,14 +1,22 @@
 /* Generic
 ==================== */
 
+html,
+body,
+#outer-wrapper
+{
+    height: 100%;
+}
+
 #wrapper {
     padding-bottom: 20px;
+    margin-bottom: -180px;
+    min-height: 100%;
 }
 
 .container {
     max-width: 1000px;
     margin-top: 15px;
-    min-height: 500px;
 }
 
 .jumbotron {
@@ -101,6 +109,7 @@ a:focus.persona-button {
 @media only screen and (max-width:760px) {
     #wrapper {
         width: 98%;
+        margin-bottom: -270px;
     }
 
     .row {
@@ -135,6 +144,11 @@ a:focus.persona-button {
     }
 }
 
+@media only screen and (max-width:1000px) {
+    #wrapper {
+        margin-bottom: -230px;
+    }
+}
 
 /* Navigation
 ==================== */
@@ -275,9 +289,15 @@ small.error {
 /* Footer
 ==================== */
 
+#colophon,
+#push {
+    height: 180px;
+}
+
 #colophon {
     background-color: #CD5F5A;
     color: #eee;
+    margin: 0px;
 }
 
 #colophon .footer-logo img {
@@ -294,4 +314,22 @@ small.error {
 
 #colophon a:hover {
     color: lightgray;
+}
+
+@media only screen and (max-width:1000px) {
+    #colophon,
+    #push {
+        height: 230px;
+    }
+
+    #colophon .license {
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width:760px) {
+    #colophon,
+    #push {
+        height: 270px;
+    }
 }
