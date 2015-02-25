@@ -84,7 +84,7 @@
               {% for plan_form in plan_formset %}
                 <div class="form-group switch">
                   <label for="id_{{ plan_form.prefix}}-has_plan">
-                    Does this price come with a plan?
+                    Is this price part of a plan?
                   </label>
                   <label class="pack-switch">
                     {{ field_with_attrs(plan_form.has_plan, class="hasplan-check") }}
@@ -114,12 +114,14 @@
                   {{ field_errors(plan_form.monthly_fee) }}
                 </div>
                 <div class="form-group hasplan">
-                  {{ field_with_attrs(plan_form.description, placeholder="Plan description") }}
+                  {{ field_with_attrs(plan_form.description,
+                                      placeholder="Plan description (eg. title)") }}
                   {{ field_errors(plan_form.description) }}
                 </div>
                 <div class="form-group hasplan">
                   <label></label>
-                  {{ field_with_attrs(plan_form.duration, placeholder="Plan duration") }}
+                  {{ field_with_attrs(plan_form.duration,
+                                      placeholder="Plan duration (in months)") }}
                   {{ field_errors(plan_form.duration) }}
                 </div>
               {% endfor %}
