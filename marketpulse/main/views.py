@@ -1,11 +1,13 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 
+from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
 from marketpulse.main.models import Activity, Contribution
 
@@ -19,6 +21,16 @@ def home(request):
 @login_required
 def edit_fxosprice(request, username='', id=None):
     user = request.user
+
+    if request.is_ajax():
+        country_code = None
+        lat = request.GET.get('latitude')
+        lng = request.GET.get('longitude')
+
+        if lat and lng:
+            location_data = reverse_geocode(lat, lng)
+            country_code = location_data.get('country')
+        return JsonResponse({'country': country_code})
 
     if not id:
         activity = Activity.objects.get(name=FFXOS_ACTIVITY_NAME)
