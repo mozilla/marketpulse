@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator
 
+from django_countries import countries
 from django_countries.fields import CountryField
 from uuslug import uuslug
 
@@ -66,7 +67,12 @@ class Carrier(models.Model):
     country = CountryField(null=True, blank=True)
 
     def __unicode__(self):
-        return self.name
+        all_countries = dict(countries)
+        country = self.country
+        if self.country.code in all_countries:
+            country = all_countries[self.country.code]
+
+        return '{0}, {1}, {2}'.format(self.name, country, self.parent_operator)
 
 
 class Plan(models.Model):
