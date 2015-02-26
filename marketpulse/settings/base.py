@@ -178,6 +178,7 @@ BROWSERID_VERIFY_CLASS = '%s.auth.views.BrowserIDVerify' % PROJECT_MODULE
 BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
+LOGIN_URL = '/'
 
 # Mozillians.org API settings
 MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
