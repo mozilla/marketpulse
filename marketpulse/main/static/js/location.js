@@ -38,11 +38,13 @@ $(document).ready(function() {
             dataType: 'json',
             data: data,
             success: function(json) {
-                if (json.country !== null) {
-                    $('#id_country').val(json.country);
-                }
-                if (json.currency !== null) {
-                    $('.formset-currency').val(json.currency);
+                if ($('#error-div').length === 0) {
+                    if (json.country !== null) {
+                        $('#id_country').val(json.country);
+                    }
+                    if (json.currency !== null) {
+                        $('.formset-currency').val(json.currency);
+                    }
                 }
             }
         });
