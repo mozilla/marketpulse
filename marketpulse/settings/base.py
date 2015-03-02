@@ -179,6 +179,10 @@ BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
 LOGIN_URL = '/'
+BROWSERID_REQUEST_ARGS = {
+    'siteName': config('BROWSERID_SITENAME', default=PROJECT_MODULE),
+    'siteLogo': config('BROWSERID_SITELOGO', default=None)
+}
 
 # Mozillians.org API settings
 MOZILLIANS_API_URL = config('MOZILLIANS_API_URL', default=None)
