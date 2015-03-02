@@ -59,47 +59,6 @@ h3.title {
     margin-top: 15px;
 }
 
-#onlineshop {
-    display: none;
-}
-
-.switch {
-    text-align: right;
-}
-
-.switch label:first-child {
-    float:left;
-    font-weight: normal;
-    margin-top: 15px;
-}
-
-.hasplan {
-    display:none;
-}
-
-.planprices {
-    border-top: 1px lightgray solid;
-}
-
-.planprices:first-child {
-    border-top: none;
-}
-
-select.form-control {
-    height: 4rem;
-    line-height: 4rem;
-}
-
-fieldset {
-    font-size:1.8rem;
-}
-
-fieldset legend {
-    background-color: #CD5F5A;
-    color: white;
-    background-image: none !important;
-}
-
 a:hover.persona-button,
 a:active.persona-button,
 a:focus.persona-button {
@@ -149,6 +108,7 @@ a:focus.persona-button {
         margin-bottom: -230px;
     }
 }
+
 
 /* Navigation
 ==================== */
@@ -265,6 +225,7 @@ select.form-control + small.error {
     top: 0px;
 }
 
+
 /* Activities
 ==================== */
 
@@ -335,4 +296,58 @@ select.form-control + small.error {
     #push {
         height: 270px;
     }
+}
+
+
+/* Form
+==================== */
+
+#onlineshop {
+    display: none;
+}
+
+.switch {
+    text-align: right;
+}
+
+.switch label:first-child {
+    float:left;
+    font-weight: normal;
+    margin-top: 15px;
+}
+
+.hasplan {
+    display:none;
+}
+
+.planprices {
+    border-top: 1px lightgray solid;
+}
+
+.planprices:first-child {
+    border-top: none;
+}
+
+select.form-control {
+    height: 4rem;
+    line-height: 4rem;
+}
+
+fieldset {
+    font-size:1.8rem;
+}
+
+fieldset legend {
+    background-color: #CD5F5A;
+    color: white;
+    background-image: none;
+}
+
+td.delete-contribution {
+    text-align: center;
+    width: 180px;
+}
+
+.delete-confirm {
+    display: none;
 }

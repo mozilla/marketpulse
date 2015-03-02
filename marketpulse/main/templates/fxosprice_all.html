@@ -18,8 +18,8 @@
       <tbody>
         {% for contribution in contributions %}
           <tr>
-            <td>{{ contribution.device.name }}</td>
-            <td>{{ contribution.created_on|timesince }}</td>
+            <td>{{ contribution.device }}</td>
+            <td>{{ contribution.created_on|timesince }} ago</td>
             <td class="hidden-xs">
               {% if contribution.availability %}
                 <span class="text-success">yes</span>
@@ -28,10 +28,12 @@
               {% endif %}
             </td>
             <td>{{ contribution.location.shop_name }}</td>
-            <td>
-              <a class="btn btn-danger btn-xs" href="{{ url('main:delete_fxosprice', contribution.pk) }}">
-                Delete
-              </a>
+            <td class="delete-contribution">
+              <button class="btn btn-danger btn-xs ask" href="#">Delete</button>
+              <span class="delete-confirm">
+                <a class="btn btn-danger btn-xs" href="{{ url('main:delete_fxosprice', contribution.pk) }}">Yes</a>
+                <a class="btn btn-default btn-xs cancel" href="#">Cancel</a>
+              </span>
             </td>
           </tr>
         {% endfor %}
@@ -44,4 +46,8 @@
       </div>
     </div>
   {% endif %}
+{% endblock %}
+
+{% block js %}
+  <script src="{{ static('js/fxosprice_all.js') }}"></script>
 {% endblock %}

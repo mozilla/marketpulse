@@ -94,7 +94,7 @@ def delete_fxosprice(request, contribution_pk):
 
     Contribution.objects.get(user=user.pk, pk=contribution_pk).delete()
     messages.success(request, 'Contribution successfully deleted')
-    return redirect(reverse('main:activities'))
+    return redirect(reverse('main:all_fxosprice'))
 
 
 @login_required
