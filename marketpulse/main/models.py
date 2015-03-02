@@ -74,6 +74,9 @@ class Carrier(models.Model):
 
         return '{0}, {1}, {2}'.format(self.name, country, self.parent_operator)
 
+    class Meta:
+        ordering = ['name']
+
 
 class Plan(models.Model):
     """Mobile phone plan information."""
