@@ -18,7 +18,7 @@
       <tbody>
         {% for contribution in contributions %}
           <tr>
-            <td>{{ contribution.device.name }}</td>
+            <td>{{ contribution.device }}</td>
             <td>{{ contribution.created_on|timesince }} ago</td>
             <td class="hidden-xs">
               {% if contribution.availability %}
