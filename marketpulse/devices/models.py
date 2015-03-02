@@ -8,4 +8,7 @@ class Device(models.Model):
     manufacturer = models.CharField(max_length=120)
 
     def __unicode__(self):
-        return '{0}, {1}'.format(self.manufacturer, self.model)
+        return u'{0}, {1}'.format(self.manufacturer, self.model)
+
+    class Meta:
+        ordering = ['manufacturer', 'model']

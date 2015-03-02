@@ -23,7 +23,7 @@ class Activity(models.Model):
         verbose_name_plural = 'activities'
 
     def __unicode__(self):
-        return self.name
+        return unicode(self.name)
 
     def save(self, *args, **kwargs):
         """Custom save method."""
@@ -42,7 +42,7 @@ class Location(LocationBase):
     is_online = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return '{0}, {1}'.format(self.shop_name, self.country)
+        return u'{0}, {1}'.format(self.shop_name, self.country)
 
 
 class Contribution(models.Model):
@@ -58,7 +58,7 @@ class Contribution(models.Model):
     availability = models.BooleanField(default=True)
 
     def __unicode__(self):
-        return '{0}, {1}'.format(self.user, self.activity)
+        return u'{0}, {1}'.format(self.user, self.activity)
 
 
 class Carrier(models.Model):
@@ -72,7 +72,10 @@ class Carrier(models.Model):
         if self.country.code in all_countries:
             country = all_countries[self.country.code]
 
-        return '{0}, {1}, {2}'.format(self.name, country, self.parent_operator)
+        return u'{0}, {1}, {2}'.format(self.name, country, self.parent_operator)
+
+    class Meta:
+        ordering = ['name']
 
 
 class Plan(models.Model):
