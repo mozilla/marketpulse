@@ -34,7 +34,7 @@
           </div>
           <div class="form-group">
             {{ field_with_attrs(location_form.shop_name,
-                                placeholder='Please provide the name of the shop')}}
+                                placeholder="Please provide the name of the shop")}}
             {{ field_errors(location_form.shop_name) }}
           </div>
           <div class="form-group" id="onlineshop">
@@ -94,7 +94,7 @@
                 </div>
                 <div class="row">
                   <div class="col-xs-8">
-                    {{ field_with_attrs(plan_form.amount, placeholder="Device Price") }}
+                    {{ field_with_attrs(plan_form.amount, placeholder="Device Price", min="0") }}
                     {{ field_errors(plan_form.amount) }}
                   </div>
                   <div class="col-xs-4">
