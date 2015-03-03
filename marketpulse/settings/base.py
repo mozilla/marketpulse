@@ -172,7 +172,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 # Django-browserid settings
 AUTH_USER_MODEL = 'mozillians_auth.User'
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-                           '%s.auth.backend.MozilliansAuthBackendLegacy' % PROJECT_MODULE)
+                           '%s.auth.backend.MozilliansAuthBackend' % PROJECT_MODULE)
 BROWSERID_VERIFY_CLASS = '%s.auth.views.BrowserIDVerify' % PROJECT_MODULE
 
 BROWSERID_AUDIENCES = config('BROWSERID_AUDIENCES', cast=Csv())
