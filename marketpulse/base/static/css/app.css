@@ -9,6 +9,20 @@ body,
     background-color: #F9F9F9;
 }
 
+#tabzilla-panel,
+#tabzilla-nav h2 {
+    font-size: 1.2rem !important;
+}
+
+#tabzilla-nav input[type="search"] {
+    height: 2.5rem;
+    font-size: 1.2em !important;
+}
+
+#tabzilla-promo h4 {
+    font-size: 3.2rem !important;
+}
+
 #wrapper {
     padding-bottom: 20px;
     margin-bottom: -180px;
