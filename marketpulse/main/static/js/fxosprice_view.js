@@ -9,5 +9,6 @@ $(document).ready(function() {
     $(document).on('click', '.cancel', function () {
         $(this).parents('.delete-contribution').find('.ask').show();
         $(this).closest('.delete-confirm').hide();
+        return false;
     });
 });

@@ -23,7 +23,8 @@
 
   <div class="row">
     <div class="col-md-12 text-right">
-      <a href="{{ url('main:all_fxosprice') }}" class="view-all">View your contributions &gt;&gt;</a>
+      <a href="{{ url('main:user_fxosprice', user.pk) }}" class="view-all">View your contributions</a> &bull;
+      <a href="{{ url('main:all_fxosprice') }}" class="view-all">View all contributions</a>
     </div>
   </div>
 
