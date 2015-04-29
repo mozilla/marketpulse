@@ -1,10 +1,10 @@
 from urlparse import urlparse
 
 from django import forms
-from django.forms.models import BaseInlineFormSet, inlineformset_factory
+from django.forms.models import BaseInlineFormSet
 
 from marketpulse.geo.lookup import reverse_geocode
-from marketpulse.main.models import Contribution, Location, Plan
+from marketpulse.main.models import Contribution, Location
 
 
 class ContributionForm(forms.ModelForm):
@@ -81,7 +81,3 @@ class BasePlanFormset(BaseInlineFormSet):
             if not has_plan and not amount:
                 msg = 'Please enter the price of this device'
                 self._errors[i]['amount'] = self.error_class([msg])
-
-
-PlanFormset = inlineformset_factory(Contribution, Plan, formset=BasePlanFormset,
-                                    extra=1, can_delete=False)

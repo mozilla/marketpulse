@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.forms.models import inlineformset_factory
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.urlresolvers import reverse
@@ -12,7 +13,7 @@ from django_countries import countries
 
 from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
-from marketpulse.main.models import Activity, Contribution
+from marketpulse.main.models import Activity, Contribution, Plan
 from marketpulse.devices.models import Device
 
 
@@ -23,7 +24,7 @@ def home(request):
 
 
 @login_required
-def edit_fxosprice(request, username='', id=None):
+def edit_fxosprice(request, contribution_pk=None):
     user = request.user
 
     if request.is_ajax():
@@ -46,15 +47,22 @@ def edit_fxosprice(request, username='', id=None):
 
         return JsonResponse(data)
 
-    if not id:
+    if not contribution_pk:
         activity = Activity.objects.get(name=FFXOS_ACTIVITY_NAME)
         contribution = Contribution(activity=activity, user=user)
+        location = None
+        extra = 1
     else:
-        contribution = get_object_or_404(Contribution, pk=id, user=user)
+        contribution = get_object_or_404(Contribution, pk=contribution_pk, user=user)
+        location = contribution.location
+        extra = 0
 
     contribution_form = forms.ContributionForm(request.POST or None, instance=contribution)
-    location_form = forms.LocationForm(request.POST or None)
-    plan_formset = forms.PlanFormset(request.POST or None, instance=contribution)
+
+    location_form = forms.LocationForm(request.POST or None, instance=location)
+    PlanFormset = inlineformset_factory(Contribution, Plan, formset=forms.BasePlanFormset,
+                                        extra=extra, can_delete=False)
+    plan_formset = PlanFormset(request.POST or None, instance=contribution)
 
     if location_form.is_valid() and contribution_form.is_valid() and plan_formset.is_valid():
         location = location_form.save()
@@ -66,9 +74,9 @@ def edit_fxosprice(request, username='', id=None):
         messages.success(request, 'Contribution successfully saved')
         contribution_form = forms.ContributionForm()
         location_form = forms.LocationForm()
-        plan_formset = forms.PlanFormset()
+        plan_formset = PlanFormset()
 
-        return redirect(reverse('main:activities'))
+        return redirect(reverse('main:list_my_contributions'))
 
     return render(request, 'fxosprice_new.html',
                   {'contribution_form': contribution_form,
