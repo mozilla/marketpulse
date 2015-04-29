@@ -57,6 +57,9 @@ class Contribution(models.Model):
     comment = models.TextField(blank=True, default='')
     availability = models.BooleanField(default=True)
 
+    class Meta:
+        ordering = ['-updated_on']
+
     def __unicode__(self):
         return u'{0}, {1}'.format(self.user, self.activity)
 

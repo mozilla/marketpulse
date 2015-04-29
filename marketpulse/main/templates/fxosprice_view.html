@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block css %}
+  {% if not contribution.location.is_online %}
+    <link href="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css" rel="stylesheet" />
+    <link href="{{ static('css/map.css') }}" rel="stylesheet" />
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h2 class="title">Firefox OS devices prices</h2>
+  <h3 class="title">Contribution</h3>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="contribution-label">
+        <legend>Contributor</legend>
+        <div>
+          {% if contribution.user == user %}
+            That's you!
+          {% else %}
+            {{ contribution.user.email }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="contribution-label">
+        <legend>When</legend>
+        <div>{{ contribution.created_on|timesince }} ago</div>
+      </div>
+      <div class="contribution-label">
+        <legend>Shop</legend>
+        <div>{{ contribution.location.shop_name }}</div>
+        <div>
+          {% if contribution.location.is_online %}
+            {{ contribution.location.link|urlize }}
+          {% else %}
+            <div id="map" data-mapboxid="{{ mapbox_id }}" data-mapboxtoken="{{ mapbox_token }}"
+                 data-lat="{{ contribution.location.lat }}"
+                 data-lng="{{ contribution.location.lng }}">
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="contribution-label">
+        <legend>Device</legend>
+        <div>
+          {{ contribution.device }} &bull;
+          {% if contribution.availability %}
+            <span class="text-success">Available</span>
+          {% else %}
+            <span class="text-danger">Not available</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="contribution-label">
+        <legend>Prices</legend>
+        {% for plan in contribution.plans.all() %}
+          {% if plan.has_plan %}
+            <div>Carrier: {{ plan.carrier }}</div>
+            <div>Plan duration: {{ plan.duration }} months</div>
+            <div>Plan description: {{ plan.description }}</div>
+            <div>Monthly Fee: {{ plan.monthly_fee }}</div>
+          {% endif %}
+          <div>Price: {{ plan.amount }} {{ plan.currency }}</div>
+          <hr>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  {% if contribution.user == user %}
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <div class="delete-contribution">
+          <button class="btn btn-danger ask" href="#" id="delete-ask">Delete</button>
+          <span class="delete-confirm">
+            <a class="btn btn-danger" href="{{ url('main:delete_fxosprice', contribution.pk) }}">Yes</a>
+            <a class="btn btn-default cancel" href="#">Cancel</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block js %}
+  {% if not contribution.location.is_online %}
+    <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
+    <script src="{{ static('js/shop_location.js') }}"></script>
+  {% endif %}
+  <script src="{{ static('js/fxosprice_view.js') }}"></script>
+{% endblock %}
