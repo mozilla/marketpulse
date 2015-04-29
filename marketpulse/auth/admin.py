@@ -9,6 +9,7 @@ User = get_user_model()
 
 
 class UserResource(resources.ModelResource):
+
     class Meta:
         model = User
         fields = ('id', 'first_name', 'last_name', 'email', 'mozillians_url')

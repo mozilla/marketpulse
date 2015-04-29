@@ -10,11 +10,13 @@ from marketpulse.main.models import Activity, Carrier, Contribution, Location, P
 
 
 class ActivityResource(resources.ModelResource):
+
     class Meta:
         model = Activity
 
 
 class LocationResource(resources.ModelResource):
+
     class Meta:
         model = Location
 
@@ -25,9 +27,9 @@ class ContributionResource(resources.ModelResource):
 
     class Meta:
         model = Contribution
-        fields = ('id', 'user__id', 'user__first_name', 'user__last_name', 'activity__id',
-                  'activity__name', 'location__region', 'location__city', 'location__lat',
-                  'location__lng', 'device__model', 'device__manufacturer',
+        fields = ('id', 'user__id', 'user__first_name', 'user__last_name', 'user__email',
+                  'activity__id', 'activity__name', 'location__region', 'location__city',
+                  'location__lat', 'location__lng', 'device__model', 'device__manufacturer',
                   'created_on', 'updated_on', 'comment', 'availability')
 
     def dehydrate_country(self, contribution):
