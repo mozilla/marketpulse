@@ -17,14 +17,16 @@
 
   <div class="row">
     <div class="col-md-12">
-      <a href="{{ url('main:edit_fxosprice') }}" class="btn btn-lg btn-default btn-block">New Firefox OS Device Price</a>
+      <a href="{{ url('main:edit_fxosprice') }}"
+         class="btn btn-lg btn-default btn-block">New Firefox OS Device Price</a>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12 text-right">
-      <a href="{{ url('main:user_fxosprice', user.pk) }}" class="view-all">View your contributions</a> &bull;
-      <a href="{{ url('main:all_fxosprice') }}" class="view-all">View all contributions</a>
+      <a href="{{ url('main:list_my_contributions') }}"
+         class="view-all">View your contributions</a> &bull;
+      <a href="{{ url('main:list_contributions') }}" class="view-all">View all contributions</a>
     </div>
   </div>
 
