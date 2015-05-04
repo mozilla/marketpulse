@@ -63,7 +63,20 @@
 
         <fieldset>
           <legend>Device</legend>
-          <div class="form-group">
+          <div class="switch is-fxos">
+            <label for="id_is_fxos">Is this a Firefox OS device?</label>
+            <label class="pack-switch">
+              {{ device_form.is_fxos }}
+              <span></span>
+            </label>
+          </div>
+          <div class="form-group other-device">
+            {{ field_with_attrs(device_form.model, placeholder="Device model") }}
+            {{ field_errors(device_form.model) }}
+            {{ field_with_attrs(device_form.manufacturer, placeholder="Device manufacturer") }}
+            {{ field_errors(device_form.manufacturer) }}
+          </div>
+          <div class="form-group fxos-device">
             {{ field_with_attrs(contribution_form.device, class="form-control") }}
           </div>
           {{ field_errors(contribution_form.device) }}

@@ -57,6 +57,16 @@ $(document).ready(function() {
         }
     });
 
+    $('.is-fxos input').change(function() {
+        if (this.checked) {
+            $('.other-device').hide();
+            $('.fxos-device').show();
+        } else {
+            $('.other-device').show();
+            $('.fxos-device').hide();
+        }
+    });
+
     // Show location form if contribution is online
     $('#id_is_online').on('change', displayLocationForm);
     displayLocationForm();
@@ -66,4 +76,11 @@ $(document).ready(function() {
 
     // Show/Hide price formset remove button
     $('.price-remove').ready(displayRemovePriceBtn);
+
+    // Initial other-device form on load
+    if ($('#id_is_fxos').attr('checked')) {
+        $('.other-device').hide();
+    } else {
+        $('.fxos-device').hide();
+    }
 });

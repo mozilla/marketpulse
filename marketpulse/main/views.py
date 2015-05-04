@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.forms.models import inlineformset_factory
+from django.forms.models import inlineformset_factory, model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.urlresolvers import reverse
@@ -14,6 +14,7 @@ from django_countries import countries
 from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
 from marketpulse.main.models import Activity, Contribution, Plan
+from marketpulse.devices.forms import DeviceForm
 from marketpulse.devices.models import Device
 
 
@@ -47,6 +48,8 @@ def edit_contribution(request, contribution_pk=None, clone=False):
 
         return JsonResponse(data)
 
+    is_fxos = True
+    other_device = None
     if not contribution_pk:
         activity = Activity.objects.get(name=FFXOS_ACTIVITY_NAME)
         contribution = Contribution(activity=activity, user=user)
@@ -56,31 +59,40 @@ def edit_contribution(request, contribution_pk=None, clone=False):
         contribution = get_object_or_404(Contribution, pk=contribution_pk, user=user)
         location = contribution.location
         extra = 0
-
-    contribution_form = forms.ContributionForm(request.POST or None, instance=contribution,
-                                               clone=clone)
+        is_fxos = contribution.device.is_fxos
+        other_device = model_to_dict(contribution.device) if not is_fxos else None
 
     location_form = forms.LocationForm(request.POST or None, instance=location)
     PlanFormset = inlineformset_factory(Contribution, Plan, formset=forms.BasePlanFormset,
                                         extra=extra, can_delete=False)
     plan_formset = PlanFormset(request.POST or None, instance=contribution)
+    device_form = DeviceForm(request.POST or None, initial=other_device)
+    contribution_form = forms.ContributionForm(instance=contribution, clone=clone)
 
-    if location_form.is_valid() and contribution_form.is_valid() and plan_formset.is_valid():
-        location = location_form.save()
-        obj = contribution_form.save(commit=False)
-        obj.location = location
-        obj.save()
-        plan_formset.save()
+    if location_form.is_valid() and plan_formset.is_valid() and device_form.is_valid():
+        is_fxos = device_form.cleaned_data['is_fxos']
+        contribution_form = forms.ContributionForm(request.POST, instance=contribution,
+                                                   is_fxos=is_fxos, clone=clone)
+        if contribution_form.is_valid():
+            location = location_form.save()
+            obj = contribution_form.save(commit=False)
+            obj.location = location
+            if not is_fxos:
+                device = device_form.save()
+                obj.device = device
+            obj.save()
+            plan_formset.save()
 
-        messages.success(request, 'Contribution successfully saved')
-        contribution_form = forms.ContributionForm()
-        location_form = forms.LocationForm()
-        plan_formset = PlanFormset()
+            messages.success(request, 'Contribution successfully saved')
+            contribution_form = forms.ContributionForm()
+            location_form = forms.LocationForm()
+            plan_formset = PlanFormset()
 
-        return redirect(reverse('main:list_my_contributions'))
+            return redirect(reverse('main:list_my_contributions'))
 
     return render(request, 'fxosprice_new.html',
                   {'contribution_form': contribution_form,
+                   'device_form': device_form,
                    'location_form': location_form,
                    'plan_formset': plan_formset,
                    'mapbox_id': settings.MAPBOX_MAP_ID,
