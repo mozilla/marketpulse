@@ -10,6 +10,8 @@ urlpatterns = patterns(
     url(r'^new/$', 'edit_contribution', name='new_contribution'),
     url(r'^contribution/(?P<contribution_pk>\d+)/edit/$', 'edit_contribution',
         name='edit_contribution'),
+    url(r'^contribution/(?P<contribution_pk>\d+)/clone/$', 'edit_contribution',
+        {'clone': True}, name='clone_contribution'),
     url(r'^contribution/(?P<contribution_pk>\d+)/delete/$', 'delete_contribution',
         name='delete_contribution'),
 )

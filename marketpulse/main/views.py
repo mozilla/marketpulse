@@ -24,7 +24,7 @@ def home(request):
 
 
 @login_required
-def edit_contribution(request, contribution_pk=None):
+def edit_contribution(request, contribution_pk=None, clone=False):
     user = request.user
 
     if request.is_ajax():
@@ -57,7 +57,8 @@ def edit_contribution(request, contribution_pk=None):
         location = contribution.location
         extra = 0
 
-    contribution_form = forms.ContributionForm(request.POST or None, instance=contribution)
+    contribution_form = forms.ContributionForm(request.POST or None, instance=contribution,
+                                               clone=clone)
 
     location_form = forms.LocationForm(request.POST or None, instance=location)
     PlanFormset = inlineformset_factory(Contribution, Plan, formset=forms.BasePlanFormset,
