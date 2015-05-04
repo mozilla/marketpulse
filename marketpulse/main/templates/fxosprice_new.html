@@ -82,47 +82,52 @@
           <div id="fieldset-planprices">
             <div class="form-group planprices">
               {% for plan_form in plan_formset %}
-                <div class="form-group switch">
-                  <label for="id_{{ plan_form.prefix}}-has_plan">
-                    Is this price part of a plan?
-                  </label>
-                  <label class="pack-switch">
-                    {{ field_with_attrs(plan_form.has_plan, class="hasplan-check") }}
-                    <span></span>
-                  </label>
-                  {{ field_errors(plan_form.has_plan) }}
-                </div>
-                <div class="row">
-                  <div class="col-xs-8">
-                    {{ field_with_attrs(plan_form.amount, placeholder="Device Price", min="0") }}
-                    {{ field_errors(plan_form.amount) }}
+                {% for hidden in plan_form.hidden_fields() %}
+                  {{ hidden }}
+                {% endfor %}
+                <div class="plan-form">
+                  <div class="form-group switch">
+                    <label for="id_{{ plan_form.prefix}}-has_plan">
+                      Is this price part of a plan?
+                    </label>
+                    <label class="pack-switch">
+                      {{ field_with_attrs(plan_form.has_plan, class="hasplan-check") }}
+                      <span></span>
+                    </label>
+                    {{ field_errors(plan_form.has_plan) }}
                   </div>
-                  <div class="col-xs-4">
-                    {{ field_with_attrs(plan_form.currency, class="form-control formset-currency")}}
-                    {{ field_errors(plan_form.currency) }}
+                  <div class="row">
+                    <div class="col-xs-8">
+                      {{ field_with_attrs(plan_form.amount, placeholder="Device Price", min="0") }}
+                      {{ field_errors(plan_form.amount) }}
+                    </div>
+                    <div class="col-xs-4">
+                      {{ field_with_attrs(plan_form.currency, class="form-control formset-currency")}}
+                      {{ field_errors(plan_form.currency) }}
+                    </div>
                   </div>
-                </div>
-                <div id="hasplan-{{ plan_form.prefix }}" class="form-group hasplan">
-                  {{ field_with_attrs(plan_form.carrier,
-                                      placeholder="Carrier name",
-                                      class="form-control") }}
-                  {{ field_errors(plan_form.carrier) }}
-                </div>
-                <div class="form-group hasplan">
-                  <label></label>
-                  {{ field_with_attrs(plan_form.monthly_fee, placeholder="Monthly fee") }}
-                  {{ field_errors(plan_form.monthly_fee) }}
-                </div>
-                <div class="form-group hasplan">
-                  {{ field_with_attrs(plan_form.description,
-                                      placeholder="Plan description (eg. title)") }}
-                  {{ field_errors(plan_form.description) }}
-                </div>
-                <div class="form-group hasplan">
-                  <label></label>
-                  {{ field_with_attrs(plan_form.duration,
-                                      placeholder="Plan duration (in months)") }}
-                  {{ field_errors(plan_form.duration) }}
+                  <div id="hasplan-{{ plan_form.prefix }}" class="form-group hasplan">
+                    {{ field_with_attrs(plan_form.carrier,
+                                        placeholder="Carrier name",
+                                        class="form-control") }}
+                    {{ field_errors(plan_form.carrier) }}
+                  </div>
+                  <div class="form-group hasplan">
+                    <label></label>
+                    {{ field_with_attrs(plan_form.monthly_fee, placeholder="Monthly fee") }}
+                    {{ field_errors(plan_form.monthly_fee) }}
+                  </div>
+                  <div class="form-group hasplan">
+                    {{ field_with_attrs(plan_form.description,
+                                        placeholder="Plan description (eg. title)") }}
+                    {{ field_errors(plan_form.description) }}
+                  </div>
+                  <div class="form-group hasplan">
+                    <label></label>
+                    {{ field_with_attrs(plan_form.duration,
+                                        placeholder="Plan duration (in months)") }}
+                    {{ field_errors(plan_form.duration) }}
+                  </div>
                 </div>
               {% endfor %}
             </div>

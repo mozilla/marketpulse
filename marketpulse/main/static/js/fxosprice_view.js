@@ -1,14 +1,14 @@
 $(document).ready(function() {
     'use strict';
+    var deleteContribution = $('.delete-contribution');
 
-    $('.delete-contribution').click(function () {
-        $(this).find('.ask').hide();
-        $(this).find('.delete-confirm').show();
+    $('#delete-ask').click(function () {
+        deleteContribution.find('.ask').hide();
+        deleteContribution.find('.delete-confirm').show();
     });
 
-    $(document).on('click', '.cancel', function () {
-        $(this).parents('.delete-contribution').find('.ask').show();
-        $(this).closest('.delete-confirm').hide();
-        return false;
+    $('.cancel').click(function () {
+        deleteContribution.find('.ask').show();
+        deleteContribution.find('.delete-confirm').hide();
     });
 });

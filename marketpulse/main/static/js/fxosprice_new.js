@@ -2,7 +2,7 @@ $(document).ready(function() {
     'use strict';
 
     $(function() {
-        $('.planprices').formset({
+        $('.plan-form').formset({
             prefix: 'plans',
             deleteText: 'Remove price',
             addCssClass: 'btn btn-default',
