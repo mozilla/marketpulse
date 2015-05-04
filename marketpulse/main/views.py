@@ -24,7 +24,7 @@ def home(request):
 
 
 @login_required
-def edit_fxosprice(request, contribution_pk=None):
+def edit_contribution(request, contribution_pk=None):
     user = request.user
 
     if request.is_ajax():
@@ -126,7 +126,7 @@ def list_contributions(request, user=None):
 
 
 @login_required
-def view_fxosprice(request, contribution_pk):
+def view_contribution(request, contribution_pk):
     user = request.user
     contribution = get_object_or_404(Contribution, pk=contribution_pk)
     return render(request, 'fxosprice_view.html',
@@ -136,7 +136,7 @@ def view_fxosprice(request, contribution_pk):
 
 
 @login_required
-def delete_fxosprice(request, contribution_pk):
+def delete_contribution(request, contribution_pk):
     user = request.user
 
     if not Contribution.objects.filter(user=user.pk, pk=contribution_pk).exists():
