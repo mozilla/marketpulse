@@ -79,11 +79,22 @@ def edit_fxosprice(request, username='', id=None):
 
 
 @login_required
-def all_fxosprice(request, user_pk=None):
-    user = request.user
+def list_my_contributions(request):
+    """View contributions of logged-in user."""
+
+    return list_contributions(request, user=request.user)
+
+
+@login_required
+def list_contributions(request, user=None):
+    """View to list either all the contributions
+    or the contributions of a user.
+
+    """
+
     contributions = Contribution.objects.all()
-    if user_pk:
-        contributions = Contribution.objects.filter(user=user_pk)
+    if user:
+        contributions = Contribution.objects.filter(user=user)
 
     devices = Device.objects.all()
     all_countries = []
@@ -99,11 +110,11 @@ def all_fxosprice(request, user_pk=None):
         device_pk = int(device_pk)
 
     return render(request, 'fxosprice_all.html',
-                  {'user': user, 'contributions': contributions,
-                  'devices': devices,
-                  'countries': all_countries,
-                  'country_code': country_code,
-                  'device_pk': device_pk})
+                  {'contributions': contributions,
+                   'devices': devices,
+                   'countries': all_countries,
+                   'country_code': country_code,
+                   'device_pk': device_pk})
 
 
 @login_required
@@ -125,7 +136,7 @@ def delete_fxosprice(request, contribution_pk):
 
     Contribution.objects.get(user=user.pk, pk=contribution_pk).delete()
     messages.success(request, 'Contribution successfully deleted')
-    return redirect(reverse('main:all_fxosprice'))
+    return redirect(reverse('main:list_contributions'))
 
 
 @login_required
