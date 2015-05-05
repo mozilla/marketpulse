@@ -74,10 +74,13 @@
     <div class="row">
       <div class="col-md-12 text-right">
         <div class="delete-contribution">
-	  <a class="btn btn-warning ask" href="{{ url('main:edit_fxosprice', contribution.pk) }}">Edit</a>
+          <a class="btn btn-warning ask"
+             href="{{ url('main:edit_contribution', contribution.pk) }}">Edit</a>
+          <a class="btn btn-warning ask"
+             href="{{ url('main:clone_contribution', contribution.pk) }}">Clone</a>
           <button class="btn btn-danger ask" href="#" id="delete-ask">Delete</button>
           <span class="delete-confirm">
-            <a class="btn btn-danger" href="{{ url('main:delete_fxosprice', contribution.pk) }}">Yes</a>
+            <a class="btn btn-danger" href="{{ url('main:delete_contribution', contribution.pk) }}">Yes</a>
             <a class="btn btn-default cancel" href="#">Cancel</a>
           </span>
         </div>

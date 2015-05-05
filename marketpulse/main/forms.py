@@ -14,6 +14,18 @@ class ContributionForm(forms.ModelForm):
         fields = ['device', 'comment', 'availability']
         widgets = {'availability': forms.CheckboxInput()}
 
+    def __init__(self, *args, **kwargs):
+        """Dynamically initialize Contribution form."""
+        self.clone = kwargs.pop('clone', False)
+        super(ContributionForm, self).__init__(*args, **kwargs)
+
+    def save(self, *args, **kwargs):
+        """Override save method to handle contribution cloning."""
+        if self.clone:
+            # Force a new entry in the db
+            self.instance.pk = None
+        return super(ContributionForm, self).save(*args, **kwargs)
+
 
 class LocationForm(forms.ModelForm):
 
