@@ -6,7 +6,7 @@ from django_countries import countries
 from import_export import fields, resources
 from import_export.admin import ExportMixin
 
-from marketpulse.main.models import Activity, Carrier, Contribution, Location, Plan
+from marketpulse.main.models import Activity, Carrier, Contribution, Location, Plan, Vote
 
 
 class ActivityResource(resources.ModelResource):
@@ -89,3 +89,8 @@ class ContributionAdmin(ExportMixin, admin.ModelAdmin):
     resource_class = ContributionResource
     list_display = ('user', 'activity', 'created_on')
     readonly_fields = ('created_on', 'updated_on')
+
+
+@admin.register(Vote)
+class VoteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'contribution', 'date_voted',)

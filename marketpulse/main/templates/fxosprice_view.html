@@ -86,6 +86,17 @@
         </div>
       </div>
     </div>
+  {% elif not user_has_voted %}
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <div class="delete-contribution">
+          <a href="{{ url('main:upvote_contribution', contribution_pk=contribution.id) }}"
+             class="btn btn-warning ask">
+            Upvote
+          </a>
+        </div>
+      </div>
+    </div>
   {% endif %}
 {% endblock %}
 
