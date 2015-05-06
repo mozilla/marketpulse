@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block css %}
+  <link href="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css" rel="stylesheet" />
+  <link href="{{ static('css/map.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+  <h2 class="title">New Photo</h2>
+
+  {% if location_form.errors or contribution_form.errors %}
+    <div id="error-div" class="row messages">
+      <div class="col-md-12">
+        <div class="alert alert-danger" role="alert">
+          Please correct the following errors
+          {{ contribution_form.errors }}
+          {{ location_form.errors }}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <form method="post" novalidate enctype="multipart/form-data">
+    {{ csrf() }}
+
+    <div class="row">
+      <div class="col-md-6">
+
+        <fieldset id="location">
+          <legend>Location</legend>
+          <div class="form-group">
+            <div id="map" data-mapboxid="{{ mapbox_id }}" data-mapboxtoken="{{ mapbox_token }}"></div>
+            <small id="location-text">Getting your location...</small>
+            {{ location_form.lat }}
+            {{ location_form.lng }}
+          </div>
+          {{ field_errors(location_form.lat) }}
+          {{ field_errors(location_form.lng) }}
+        </fieldset>
+
+      </div>
+
+      <div class="col-md-6">
+
+        <fieldset>
+          <legend>Media</legend>
+          <div class="form-group">
+
+            <div id="upload-container"></div>
+            <div>
+              <a href="#" class="btn btn-default btn-block" id="pickimage" data-role="button">Pick Image</a>
+            </div>
+            <input type="file" name="image" id="form-image">
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Comment</legend>
+          <div class="form-group">
+            {{ field_with_attrs(contribution_form.comment,
+                                rows="3",
+                                placeholder="Add any comments")}}
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 text-right">
+        <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+
+{% block js %}
+  <script src="https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js"></script>
+  <script src="{{ static('js/location.js') }}"></script>
+  <script src="{{ static('js/media_new.js') }}"></script>
+{% endblock %}

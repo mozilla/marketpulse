@@ -2,6 +2,7 @@ import moneyed
 
 
 FFXOS_ACTIVITY_NAME = 'Submit FirefoxOS device price'
+FFXOS_MEDIA_ACTIVITY_NAME = 'Upload FirefoxOS media'
 
 
 def get_currency_choices():

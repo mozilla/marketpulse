@@ -15,7 +15,7 @@ class Activity(models.Model):
     """Model for activity types."""
 
     name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, max_length=255, blank=True, default='')
+    slug = models.SlugField(max_length=255, blank=True, default='')
 
     class Meta:
         ordering = ['name']
@@ -37,7 +37,7 @@ class Location(LocationBase):
     """Model for contribution location."""
 
     address = models.CharField(max_length=120, blank=True, default='')
-    shop_name = models.CharField(max_length=120)
+    shop_name = models.CharField(max_length=120, blank=True, default='Media upload')
     link = models.URLField(max_length=500, blank=True, default='')
     is_online = models.BooleanField(default=False)
 
@@ -56,6 +56,7 @@ class Contribution(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     comment = models.TextField(blank=True, default='')
     availability = models.BooleanField(default=True)
+    image = models.ImageField(upload_to='ffos', blank=True)
 
     class Meta:
         ordering = ['-updated_on']
