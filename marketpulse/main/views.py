@@ -13,12 +13,14 @@ from django_countries import countries
 
 from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
-from marketpulse.main.models import Activity, Contribution, Plan
+from marketpulse.main.models import Activity, Contribution, Plan, Vote
 from marketpulse.devices.forms import DeviceForm
 from marketpulse.devices.models import Device
 
 
 def home(request):
+    """Landing page view."""
+
     if request.user.is_authenticated():
         return redirect(reverse('main:activities'))
     return render(request, 'home.html')
@@ -26,6 +28,8 @@ def home(request):
 
 @login_required
 def edit_contribution(request, contribution_pk=None, clone=False):
+    """Edit a single contribution."""
+
     user = request.user
 
     if request.is_ajax():
@@ -140,12 +144,28 @@ def list_contributions(request, user=None):
 
 @login_required
 def view_contribution(request, contribution_pk):
+    """View a single contribution."""
+
     user = request.user
     contribution = get_object_or_404(Contribution, pk=contribution_pk)
+    user_has_voted = Vote.objects.filter(user=user, contribution=contribution).exists()
     return render(request, 'fxosprice_view.html',
                   {'user': user, 'contribution': contribution,
                    'mapbox_id': settings.MAPBOX_MAP_ID,
-                   'mapbox_token': settings.MAPBOX_TOKEN})
+                   'mapbox_token': settings.MAPBOX_TOKEN,
+                   'user_has_voted': user_has_voted})
+
+
+@login_required
+def upvote_contribution(request, contribution_pk):
+    """Upvote a contribution."""
+
+    user = request.user
+    contribution = get_object_or_404(Contribution, pk=contribution_pk)
+
+    if not Vote.objects.filter(user=user, contribution=contribution).exists():
+        Vote.objects.create(user=user, contribution=contribution)
+    return redirect(reverse('main:list_contributions'))
 
 
 @login_required

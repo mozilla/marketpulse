@@ -92,3 +92,19 @@ class Plan(models.Model):
     currency = models.CharField(max_length=128, choices=get_currency_choices(), default='')
     carrier = models.ForeignKey(Carrier, related_name='carriers', null=True, blank=True)
     monthly_fee = models.FloatField(blank=True, null=True, validators=[MinValueValidator(0.0)])
+
+
+class Vote(models.Model):
+    """Vote model.
+
+    Register the upvotes/confirmations for each contribution.
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='voted_on')
+    contribution = models.ForeignKey(Contribution, related_name='votes')
+    date_voted = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'contribution',)
+
+    def __unicode__(self):
+        return u'{0}, {1}'.format(self.user, self.contribution)
