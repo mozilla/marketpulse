@@ -3,6 +3,7 @@ from urlparse import urlparse
 from django import forms
 from django.forms.models import BaseInlineFormSet
 
+from marketpulse.devices.models import Device
 from marketpulse.geo.lookup import reverse_geocode
 from marketpulse.main.models import Contribution, Location
 
@@ -17,7 +18,13 @@ class ContributionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         """Dynamically initialize Contribution form."""
         self.clone = kwargs.pop('clone', False)
+        self.is_fxos = kwargs.pop('is_fxos', True)
+
         super(ContributionForm, self).__init__(*args, **kwargs)
+
+        if not self.is_fxos:
+            self.fields['device'].required = False
+        self.fields['device'].queryset = Device.objects.filter(is_fxos=True)
 
     def save(self, *args, **kwargs):
         """Override save method to handle contribution cloning."""
@@ -25,6 +32,16 @@ class ContributionForm(forms.ModelForm):
             # Force a new entry in the db
             self.instance.pk = None
         return super(ContributionForm, self).save(*args, **kwargs)
+
+    def clean(self, *args, **kwargs):
+        """Custom clean for ContributionForm fields."""
+        cleaned_data = super(ContributionForm, self).clean(*args, **kwargs)
+
+        # When a non-fxos device is selected nullify fxos dropdown
+        if not self.is_fxos:
+            cleaned_data['device'] = None
+
+        return cleaned_data
 
 
 class LocationForm(forms.ModelForm):
