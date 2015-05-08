@@ -24,6 +24,7 @@ class LocationResource(resources.ModelResource):
 class ContributionResource(resources.ModelResource):
     country = fields.Field()
     plans = fields.Field()
+    votes = fields.Field()
 
     class Meta:
         model = Contribution
@@ -46,6 +47,9 @@ class ContributionResource(resources.ModelResource):
             return json.dumps(list(plans), indent=4)
         else:
             return ''
+
+    def dehydrate_votes(self, contribution):
+        return contribution.votes.all().count()
 
 
 class PlanResource(resources.ModelResource):
