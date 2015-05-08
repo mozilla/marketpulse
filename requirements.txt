@@ -122,3 +122,5 @@ django-countries==3.1.1
 py-moneyed==0.5.0
 # sha256: 4bmcawK_tCp_yJB624zuXkZLRPiAM1kSArLlYFTjZQU
 peep==2.4
+# sha256: h2DBGKAhXroWP3eCEQ5-_NuxX4pzIfP2HFrA27sSyZY
+Pillow==2.8.1

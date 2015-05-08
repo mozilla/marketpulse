@@ -371,6 +371,16 @@ td.delete-contribution {
     display: none;
 }
 
+#upload-container {
+    margin-bottom: 10px;
+}
+
+#form-image {
+    width: 0px;
+    height: 0px;
+    overflow: hidden;
+}
+
 
 /* Contributions
 ==================== */

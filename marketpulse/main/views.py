@@ -12,7 +12,8 @@ import moneyed
 from django_countries import countries
 
 from marketpulse.geo.lookup import reverse_geocode
-from marketpulse.main import FFXOS_ACTIVITY_NAME, forms
+
+from marketpulse.main import FFXOS_ACTIVITY_NAME, FFXOS_MEDIA_ACTIVITY_NAME, forms
 from marketpulse.main.models import Activity, Contribution, Plan, Vote
 from marketpulse.devices.forms import DeviceForm
 from marketpulse.devices.models import Device
@@ -117,9 +118,9 @@ def list_contributions(request, user=None):
 
     """
 
-    contributions = Contribution.objects.all()
+    contributions = Contribution.objects.filter(activity__name=FFXOS_ACTIVITY_NAME)
     if user:
-        contributions = Contribution.objects.filter(user=user)
+        contributions = Contribution.objects.filter(user=user, activity__name=FFXOS_ACTIVITY_NAME)
 
     devices = Device.objects.all()
     all_countries = []
@@ -201,3 +202,35 @@ def manifest(request):
                             content_type='application/x-web-app-manifest+json; charset=utf-8')
     response['Content-Disposition'] = 'attachment;filename=manifest.webapp'
     return response
+
+
+@login_required
+def new_media(request):
+    user = request.user
+
+    activity = Activity.objects.get(name=FFXOS_MEDIA_ACTIVITY_NAME)
+    contribution = Contribution(activity=activity, user=user)
+
+    contribution_form = forms.ImageForm(request.POST or None,
+                                        request.FILES or None,
+                                        instance=contribution)
+
+    location_form = forms.LocationForm(request.POST or None)
+
+    if location_form.is_valid() and contribution_form.is_valid():
+        location = location_form.save()
+        obj = contribution_form.save(commit=False)
+        obj.location = location
+        obj.save()
+
+        messages.success(request, 'Contribution successfully saved')
+        contribution_form = forms.ImageForm()
+        location_form = forms.LocationForm()
+
+        return redirect(reverse('main:activities'))
+
+    return render(request, 'media_new.html',
+                  {'contribution_form': contribution_form,
+                   'location_form': location_form,
+                   'mapbox_id': settings.MAPBOX_MAP_ID,
+                   'mapbox_token': settings.MAPBOX_TOKEN})

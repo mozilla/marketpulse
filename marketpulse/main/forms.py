@@ -44,6 +44,13 @@ class ContributionForm(forms.ModelForm):
         return cleaned_data
 
 
+class ImageForm(forms.ModelForm):
+
+    class Meta:
+        model = Contribution
+        fields = ['image', 'comment']
+
+
 class LocationForm(forms.ModelForm):
 
     class Meta:

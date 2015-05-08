@@ -8,4 +8,5 @@ urlpatterns = patterns(
     url(r'^activities/$', 'activities', name='activities'),
     url(r'^manifest\.webapp', 'manifest', name='manifest'),
     url(r'^fxosprice/', include('{0}.main.fxosprice_urls'.format(settings.PROJECT_MODULE))),
+    url(r'^media/', include('{0}.main.media_urls'.format(settings.PROJECT_MODULE))),
 )
