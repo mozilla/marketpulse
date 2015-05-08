@@ -15,7 +15,7 @@ class Activity(models.Model):
     """Model for activity types."""
 
     name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, max_length=255)
+    slug = models.SlugField(unique=True, max_length=255, blank=True, default='')
 
     class Meta:
         ordering = ['name']
