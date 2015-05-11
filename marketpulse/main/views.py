@@ -120,7 +120,7 @@ def list_contributions(request, user=None):
 
     contributions = Contribution.objects.filter(activity__name=FFXOS_ACTIVITY_NAME)
     if user:
-        contributions = Contribution.objects.filter(user=user, activity__name=FFXOS_ACTIVITY_NAME)
+        contributions = contributions.filter(user=user)
 
     devices = Device.objects.all()
     all_countries = []

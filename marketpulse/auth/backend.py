@@ -34,6 +34,7 @@ class MozilliansAuthBackend(BrowserIDBackend):
 
         if user and mozillian:
             user.mozillians_url = mozillian['url']
+            user.mozillians_username = mozillian['username']
             user.save()
 
         return user
