@@ -388,3 +388,7 @@ td.delete-contribution {
 .contribution-label {
     margin-bottom: 15px;
 }
+
+.contribution-table td{
+    text-align: center;
+}
