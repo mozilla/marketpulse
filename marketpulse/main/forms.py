@@ -50,6 +50,10 @@ class ImageForm(forms.ModelForm):
         model = Contribution
         fields = ['image', 'comment']
 
+    def __init__(self, *args, **kwargs):
+        super(ImageForm, self).__init__(*args, **kwargs)
+        self.fields['image'].required = True
+
 
 class LocationForm(forms.ModelForm):
 

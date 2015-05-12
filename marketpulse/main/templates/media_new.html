@@ -13,8 +13,6 @@
       <div class="col-md-12">
         <div class="alert alert-danger" role="alert">
           Please correct the following errors
-          {{ contribution_form.errors }}
-          {{ location_form.errors }}
         </div>
       </div>
     </div>
@@ -44,6 +42,7 @@
             {{ field_with_attrs(contribution_form.comment,
                                 rows="3",
                                 placeholder="Add any comments")}}
+	    {{ field_errors(contribution_form.comment) }}
           </div>
         </fieldset>
 
@@ -54,12 +53,14 @@
         <fieldset>
           <legend>Media</legend>
           <div class="form-group">
-
             <div id="upload-container"></div>
             <div>
               <a href="#" class="btn btn-default btn-block" id="pickimage" data-role="button">Pick Image</a>
             </div>
             <input type="file" name="image" id="form-image">
+            <div id="image-errors">
+              {{ field_errors(contribution_form.image) }}
+            </div>
           </div>
         </fieldset>
       </div>
