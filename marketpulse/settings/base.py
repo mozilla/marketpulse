@@ -119,6 +119,8 @@ STATIC_URL = config('STATIC_URL', '/static/')
 MEDIA_ROOT = config('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = config('MEDIA_URL', '/files/')
 
+ITEMS_PER_PAGE = config('ITEMS_PER_PAGE', default=10)
+
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
 
 TEMPLATE_LOADERS = (

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.forms.models import inlineformset_factory, model_to_dict
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
@@ -134,6 +135,16 @@ def list_contributions(request, user=None):
     if device_pk:
         contributions = contributions.filter(device=device_pk)
         device_pk = int(device_pk)
+
+    contributions_paginator = Paginator(contributions, settings.ITEMS_PER_PAGE)
+    contributions_page = request.GET.get('page', 1)
+
+    try:
+        contributions = contributions_paginator.page(contributions_page)
+    except PageNotAnInteger:
+        contributions = contributions_paginator.page(1)
+    except EmptyPage:
+        contributions = contributions_paginator.page(contributions_paginator.num_pages)
 
     return render(request, 'fxosprice_all.html',
                   {'contributions': contributions,
