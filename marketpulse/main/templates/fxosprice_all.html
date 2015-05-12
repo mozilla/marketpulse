@@ -74,6 +74,32 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="row">
+      <div class="col-md-12 text-center">
+        {% if contributions.has_previous() %}
+          <a class="prev" title="Previous page" data-tooltip
+             href="{{ '#'|urlparams(page=contributions.previous_page_number()) }}">
+            &laquo;
+          </a>
+        {% endif %}
+        <label for="page-select">Page: </label>
+        <select id="page-select" autocomplete="off">
+          {% for i in range(1, contributions.paginator.num_pages + 1) %}
+            <option {% if i == contributions.number %} selected {% endif %}
+                    value="{{ '#'|urlparams(page=i) }}">
+              {{ i }}
+            </option>
+          {% endfor %}
+        </select>
+        {% if contributions.has_next() %}
+          <a class="next" title="Next page" data-tooltip
+             href="{{ '#'|urlparams(page=contributions.next_page_number()) }}">
+            &raquo;
+          </a>
+        {% endif %}
+      </div>
+    </div>
   {% else %}
     <div class="row">
       <div class="col-md-12 text-center">
