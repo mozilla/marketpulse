@@ -8,7 +8,7 @@
     <form action="" method="get">
       <div class="col-md-5">
         <div class="form-group">
-          <select class="form-control" name="country_code" >
+          <select class="form-control" name="country_code">
             <option value="">All Countries</option>
             {% for country in countries %}
               <option value="{{ country.code }}" {% if country.code == country_code %}selected{% endif %}>
@@ -39,7 +39,7 @@
   </div>
 
   {% if contributions %}
-    <table class="table table-condensed">
+    <table class="table table-condensed contribution-table">
       <thead>
         <tr>
           <td>Device</td>
@@ -47,6 +47,7 @@
           <td>Country</td>
           <td class="hidden-xs">Shop</td>
           <td>Contributor</td>
+          <td>Verified</td>
           <td></td>
         </tr>
       </thead>
@@ -62,6 +63,13 @@
                 That's you!
               {% else %}
                 {{ contribution.user.email }}
+              {% endif %}
+            </td>
+            <td>
+              {% if contribution.votes.exists() %}
+                <span class="glyphicon glyphicon-ok"></span>
+              {% else %}
+                <span class="glyphicon glyphicon-remove"></span>
               {% endif %}
             </td>
             <td class="delete-contribution">
