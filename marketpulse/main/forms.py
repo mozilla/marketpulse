@@ -59,6 +59,13 @@ class LocationForm(forms.ModelForm):
         widgets = {'lat': forms.HiddenInput(),
                    'lng': forms.HiddenInput()}
 
+    def __init__(self, *args, **kwargs):
+        """Dynamically initialize Location form."""
+        self.is_media = kwargs.pop('is_media', False)
+        super(LocationForm, self).__init__(*args, **kwargs)
+        if not self.is_media:
+            self.fields['shop_name'].initial = 'Please add the name of the shop'
+
     def clean(self):
         cdata = super(LocationForm, self).clean()
         url = cdata.get('link')

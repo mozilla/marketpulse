@@ -215,7 +215,7 @@ def new_media(request):
                                         request.FILES or None,
                                         instance=contribution)
 
-    location_form = forms.LocationForm(request.POST or None)
+    location_form = forms.LocationForm(request.POST or None, is_media=True)
 
     if location_form.is_valid() and contribution_form.is_valid():
         location = location_form.save()
