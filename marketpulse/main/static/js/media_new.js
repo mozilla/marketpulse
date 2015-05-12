@@ -10,7 +10,7 @@ $(document).ready(function() {
         if (this.files && this.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                var img = $('<img id="upload-image" style="max-width:300px;">');
+                var img = $('<img id="upload-image" style="width:100%;">');
                 img.attr('src', e.target.result);
                 $('#upload-container').html(img);
             }

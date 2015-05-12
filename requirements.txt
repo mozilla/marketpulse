@@ -124,3 +124,9 @@ py-moneyed==0.5.0
 peep==2.4
 # sha256: h2DBGKAhXroWP3eCEQ5-_NuxX4pzIfP2HFrA27sSyZY
 Pillow==2.8.1
+# sha256: 2LKtaRR0PXvOm3gItcXM8KIyRxxHzJ7IjeL6XV5VRDo
+django-imagekit==3.2.6
+# sha256: PZvJY9gAiuFR1sZk-f1VRCcF6puebXznfN1Av5LZHzo
+django-appconf==1.0.1
+# sha256: Xyd9H1YPFIiPg8VMBJr8NLh0Smql4ri_WwjEDqAd1Sg
+pilkit==1.1.12

@@ -371,6 +371,18 @@ td.delete-contribution {
     display: none;
 }
 
+
+/* Contributions
+==================== */
+
+.contribution-label {
+    margin-bottom: 15px;
+}
+
+
+/* Media
+==================== */
+
 #upload-container {
     margin-bottom: 10px;
 }
@@ -381,14 +393,19 @@ td.delete-contribution {
     overflow: hidden;
 }
 
+.gallery {
+    text-align: center;
+}
 
-/* Contributions
-==================== */
-
-.contribution-label {
-    margin-bottom: 15px;
+.panel {
+    display: inline-block;
+    margin: 5px;
 }
 
 .contribution-table td{
     text-align: center;
+}
+
+.pagination > li {
+    margin-left: 0px;
 }

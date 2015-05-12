@@ -1,5 +1,6 @@
 FROM debian:wheezy
-RUN apt-get update && apt-get install -y python python-pip python-dev libpq-dev postgresql-client gettext
+RUN apt-get update && apt-get install -y python python-pip python-dev libpq-dev \
+postgresql-client gettext libjpeg-dev
 
 # Using PIL or Pillow? You probably want to uncomment next line
 # RUN apt-get update && apt-get install -y libjpeg8-dev

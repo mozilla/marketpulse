@@ -38,6 +38,15 @@
           {{ field_errors(location_form.lng) }}
         </fieldset>
 
+        <fieldset>
+          <legend>Comment</legend>
+          <div class="form-group">
+            {{ field_with_attrs(contribution_form.comment,
+                                rows="3",
+                                placeholder="Add any comments")}}
+          </div>
+        </fieldset>
+
       </div>
 
       <div class="col-md-6">
@@ -51,14 +60,6 @@
               <a href="#" class="btn btn-default btn-block" id="pickimage" data-role="button">Pick Image</a>
             </div>
             <input type="file" name="image" id="form-image">
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Comment</legend>
-          <div class="form-group">
-            {{ field_with_attrs(contribution_form.comment,
-                                rows="3",
-                                placeholder="Add any comments")}}
           </div>
         </fieldset>
       </div>

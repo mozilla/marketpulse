@@ -245,3 +245,27 @@ def new_media(request):
                    'location_form': location_form,
                    'mapbox_id': settings.MAPBOX_MAP_ID,
                    'mapbox_token': settings.MAPBOX_TOKEN})
+
+
+def all_media(request):
+    """View gallery with all photo contributions"""
+
+    contributions = Contribution.objects.filter(activity__name=FFXOS_MEDIA_ACTIVITY_NAME)
+
+    contributions_paginator = Paginator(contributions, settings.PHOTOS_PER_PAGE)
+    contributions_page = request.GET.get('page', 1)
+
+    try:
+        contributions = contributions_paginator.page(contributions_page)
+    except PageNotAnInteger:
+        contributions = contributions_paginator.page(1)
+    except EmptyPage:
+        contributions = contributions_paginator.page(contributions_paginator.num_pages)
+
+    # Make sure we have all thumbnails ready
+    for contribution in contributions:
+        if not contribution.image_thumb:
+            contribution.image_thumb.generate()
+
+    return render(request, 'media_all.html', {'contributions': contributions,
+                                              'media_url': settings.MEDIA_URL})
