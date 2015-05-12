@@ -117,7 +117,7 @@ STATIC_ROOT = config('STATIC_ROOT', default=os.path.join(BASE_DIR, 'static'))
 STATIC_URL = config('STATIC_URL', '/static/')
 
 MEDIA_ROOT = config('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
-MEDIA_URL = config('MEDIA_URL', '/media/')
+MEDIA_URL = config('MEDIA_URL', '/files/')
 
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
 
