@@ -62,7 +62,10 @@ def edit_contribution(request, contribution_pk=None, clone=False):
         location = None
         extra = 1
     else:
-        contribution = get_object_or_404(Contribution, pk=contribution_pk, user=user)
+        if clone:
+            contribution = get_object_or_404(Contribution, pk=contribution_pk)
+        else:
+            contribution = get_object_or_404(Contribution, pk=contribution_pk, user=user)
         location = contribution.location
         extra = 0
         is_fxos = contribution.device.is_fxos
@@ -83,6 +86,8 @@ def edit_contribution(request, contribution_pk=None, clone=False):
             location = location_form.save()
             obj = contribution_form.save(commit=False)
             obj.location = location
+            if clone:
+                obj.user = user
             if not is_fxos:
                 device = device_form.save()
                 obj.device = device
