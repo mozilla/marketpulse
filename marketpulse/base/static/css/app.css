@@ -397,6 +397,10 @@ td.delete-contribution {
     text-align: center;
 }
 
+#image-errors > small{
+    top: 0px;
+}
+
 .panel {
     display: inline-block;
     margin: 5px;
