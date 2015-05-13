@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_nose',
     'import_export',
     'django_countries',
+    'imagekit',
 
     # Project specific apps
     '%s.auth' % PROJECT_MODULE,
@@ -120,6 +121,7 @@ MEDIA_ROOT = config('MEDIA_ROOT', default=os.path.join(BASE_DIR, 'media'))
 MEDIA_URL = config('MEDIA_URL', '/files/')
 
 ITEMS_PER_PAGE = config('ITEMS_PER_PAGE', default=10)
+PHOTOS_PER_PAGE = config('ITEMS_PER_PAGE', default=24)
 
 SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', default=not DEBUG, cast=bool)
 
@@ -195,3 +197,5 @@ MOZILLIANS_APP_NAME = config('MOZILLIANS_APP_NAME', default=None)
 MAPBOX_GEOCODE_URL = 'https://api.tiles.mapbox.com/v4/geocode/mapbox.places/'
 MAPBOX_MAP_ID = config('MAPBOX_MAP_ID', default=None)
 MAPBOX_TOKEN = config('MAPBOX_TOKEN', default=None)
+
+DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic'

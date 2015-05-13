@@ -5,6 +5,8 @@ from django.core.validators import MinValueValidator
 from django_countries import countries
 from django_countries.fields import CountryField
 from uuslug import uuslug
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 from marketpulse.devices.models import Device
 from marketpulse.geo.models import LocationBase
@@ -57,6 +59,10 @@ class Contribution(models.Model):
     comment = models.TextField(blank=True, default='')
     availability = models.BooleanField(default=True)
     image = models.ImageField(upload_to='ffos', blank=True)
+    image_thumb = ImageSpecField(source='image',
+                                 processors=[ResizeToFill(100, 100)],
+                                 format='JPEG',
+                                 options={'quality': 60})
 
     class Meta:
         ordering = ['-updated_on']

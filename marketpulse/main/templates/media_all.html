@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2 class="title">Photos</h2>
+  <h3 class="title">Contributions</h3>
+
+  <div class="row gallery">
+    <div class="col-md-12">
+      {% for contribution in contributions %}
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <a href="#" data-toggle="modal" data-target="#ImageModal-{{ contribution.pk }}">
+              <img src="{{ media_url }}{{ contribution.image_thumb }}">
+            </a>
+          </div>
+        </div>
+
+        <!-- Full Image Modals -->
+        <div class="modal fade" id="ImageModal-{{ contribution.pk }}" tabindex="-1" role="dialog" aria-labelledby="ImageModal-{{ contribution.pk }}" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img src="{{ media_url }}{{ contribution.image }}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Dismiss</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <nav class="text-center">
+    <ul class="pagination">
+      {% if contributions.has_previous() %}
+        <li>
+          <a href="{{ '#'|urlparams(page=contributions.previous_page_number()) }}"
+             aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled">
+          <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+        </li>
+      {% endif %}
+      {% for i in range(1, contributions.paginator.num_pages + 1) %}
+        <li {% if i == contributions.number %}class="active"{% endif %}>
+          <a href="{{ '#'|urlparams(page=i) }}">{{ i }}</a>
+        </li>
+      {% endfor %}
+      {% if contributions.has_next() %}
+        <li>
+          <a href="{{ '#'|urlparams(page=contributions.next_page_number()) }}"
+             aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {% else %}
+        <li class="disabled">
+          <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endblock %}

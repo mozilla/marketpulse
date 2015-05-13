@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h2 class="title">Divices Prices</h2>
+  <h2 class="title">Device Prices</h2>
   <h3 class="title">Contributions</h3>
 
   <div class="row">
@@ -83,31 +83,39 @@
       </tbody>
     </table>
 
-    <div class="row">
-      <div class="col-md-12 text-center">
+    <nav class="text-center">
+      <ul class="pagination">
         {% if contributions.has_previous() %}
-          <a class="prev" title="Previous page" data-tooltip
-             href="{{ '#'|urlparams(page=contributions.previous_page_number()) }}">
-            &laquo;
-          </a>
+          <li>
+            <a href="{{ '#'|urlparams(page=contributions.previous_page_number()) }}"
+               aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% else %}
+          <li class="disabled">
+            <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+          </li>
         {% endif %}
-        <label for="page-select">Page: </label>
-        <select id="page-select" autocomplete="off">
-          {% for i in range(1, contributions.paginator.num_pages + 1) %}
-            <option {% if i == contributions.number %} selected {% endif %}
-                    value="{{ '#'|urlparams(page=i) }}">
-              {{ i }}
-            </option>
-          {% endfor %}
-        </select>
+        {% for i in range(1, contributions.paginator.num_pages + 1) %}
+          <li {% if i == contributions.number %}class="active"{% endif %}>
+            <a href="{{ '#'|urlparams(page=i) }}">{{ i }}</a>
+          </li>
+        {% endfor %}
         {% if contributions.has_next() %}
-          <a class="next" title="Next page" data-tooltip
-             href="{{ '#'|urlparams(page=contributions.next_page_number()) }}">
-            &raquo;
-          </a>
+          <li>
+            <a href="{{ '#'|urlparams(page=contributions.next_page_number()) }}"
+               aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        {% else %}
+          <li class="disabled">
+            <a href="#" aria-label="Previous"><span aria-hidden="true">&raquo;</span></a>
+          </li>
         {% endif %}
-      </div>
-    </div>
+      </ul>
+    </nav>
   {% else %}
     <div class="row">
       <div class="col-md-12 text-center">

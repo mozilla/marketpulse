@@ -19,3 +19,11 @@ urlpatterns = patterns(
     # Admin
     url(r'^admin/', include(admin.site.urls)),
 )
+
+# In DEBUG mode, serve static/media files through Django
+if settings.DEBUG:
+    urlpatterns += patterns(
+        '',
+        url(r'^files/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}),
+    )
