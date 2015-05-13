@@ -84,6 +84,12 @@ a:focus.persona-button {
     font-size: 15px;
 }
 
+.license-text {
+    font-size: 0.7em;
+    font-style: italic;
+    padding: 2px;
+}
+
 @media only screen and (max-width:760px) {
     #wrapper {
         width: 98%;
