@@ -13,6 +13,11 @@ class MozilliansAuthBackend(BrowserIDBackend):
         api_key = settings.MOZILLIANS_API_KEY
         self.mozillians_client = MozilliansClient(api_url, api_key)
 
+    def _normalize_email(self, email):
+        email_name, domain = email.strip().rsplit('@', 1)
+        email = '@'.join([email_name, domain.lower()])
+        return email
+
     def is_valid_email(self, email):
         try:
             user = self.mozillians_client.lookup_user({'email': email}, detailed=False)
@@ -25,7 +30,7 @@ class MozilliansAuthBackend(BrowserIDBackend):
         return user and authentication_policy(user)
 
     def create_user(self, email):
-        user = super(MozilliansAuthBackend, self).create_user(email)
+        user = super(MozilliansAuthBackend, self).create_user(self._normalize_email(email))
 
         try:
             mozillian = self.mozillians_client.lookup_user({'email': email})
@@ -50,6 +55,11 @@ class MozilliansAuthBackendLegacy(BrowserIDBackend):
 
         self.mozillians_client = MozilliansClientLegacy(self.api_url, self.api_key, self.app_name)
 
+    def _normalize_email(self, email):
+        email_name, domain = email.strip().rsplit('@', 1)
+        email = '@'.join([email_name, domain.lower()])
+        return email
+
     def is_valid_email(self, email):
         try:
             user = self.mozillians_client.email_lookup(email)
@@ -62,7 +72,7 @@ class MozilliansAuthBackendLegacy(BrowserIDBackend):
         return user and authentication_policy(user)
 
     def create_user(self, email):
-        user = super(MozilliansAuthBackendLegacy, self).create_user(email)
+        user = super(MozilliansAuthBackendLegacy, self).create_user(self._normalize_email(email))
 
         try:
             mozillian = self.mozillians_client.email_lookup(email)

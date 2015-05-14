@@ -45,3 +45,15 @@ class MozilliansAuthBackendTests(TestCase):
         responses.add(responses.GET, url=url, body=body, status=200,
                       content_type='application/json')
         ok_(not backend.is_valid_email('foo@example.com'))
+
+    def test_normalize_lower_case_email(self):
+        email = 'foo@bar.com'
+        backend = MozilliansAuthBackend()
+        normalized_email = backend._normalize_email(email)
+        eq_(normalized_email, 'foo@bar.com')
+
+    def test_normalize_mixed_case_email(self):
+        email = 'Foo@BaR.com'
+        backend = MozilliansAuthBackend()
+        normalized_email = backend._normalize_email(email)
+        eq_(normalized_email, 'Foo@bar.com')
