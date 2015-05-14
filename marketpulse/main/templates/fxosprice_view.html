@@ -55,6 +55,8 @@
     </div>
     <div class="col-md-6">
       <div class="contribution-label">
+        <legend>Comments</legend>
+        <div> {{ contribution.comment }} </div>
         <legend>Prices</legend>
         {% for plan in contribution.plans.all() %}
           {% if plan.has_plan %}
