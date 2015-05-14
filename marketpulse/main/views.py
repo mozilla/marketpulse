@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -124,7 +125,8 @@ def list_contributions(request, user=None):
 
     """
 
-    contributions = Contribution.objects.filter(activity__name=FFXOS_ACTIVITY_NAME)
+    contributions = (Contribution.objects.filter(activity__name=FFXOS_ACTIVITY_NAME)
+                     .annotate(total_votes=Count('votes')).order_by('-total_votes'))
     if user:
         contributions = contributions.filter(user=user)
 
@@ -174,8 +176,8 @@ def view_contribution(request, contribution_pk):
 
 
 @login_required
-def upvote_contribution(request, contribution_pk):
-    """Upvote a contribution."""
+def verify_contribution(request, contribution_pk):
+    """Verify a contribution."""
 
     user = request.user
     contribution = get_object_or_404(Contribution, pk=contribution_pk)

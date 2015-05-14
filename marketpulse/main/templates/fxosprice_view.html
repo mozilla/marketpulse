@@ -93,9 +93,9 @@
           <a class="btn btn-warning ask"
              href="{{ url('main:clone_contribution', contribution.pk) }}">Clone</a>
           {% if not user_has_voted %}
-            <a href="{{ url('main:upvote_contribution', contribution_pk=contribution.id) }}"
+            <a href="{{ url('main:verify_contribution', contribution_pk=contribution.id) }}"
                class="btn btn-warning ask">
-              Upvote
+              Verify
             </a>
           {% endif %}
         </div>

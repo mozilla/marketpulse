@@ -68,7 +68,7 @@ class Contribution(models.Model):
         ordering = ['-updated_on']
 
     def __unicode__(self):
-        return u'{0}, {1}'.format(self.user, self.activity)
+        return u'{0}, {1}, {2}'.format(self.user, self.activity, self.id)
 
 
 class Carrier(models.Model):
