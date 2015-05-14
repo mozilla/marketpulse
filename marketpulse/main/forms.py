@@ -106,6 +106,10 @@ class LocationForm(forms.ModelForm):
 
 class BasePlanFormset(BaseInlineFormSet):
 
+    def __init__(self, *args, **kwargs):
+        self.clone = kwargs.pop('clone', None)
+        super(BasePlanFormset, self).__init__(*args, **kwargs)
+
     def clean(self):
         """Clean formset."""
 
@@ -132,3 +136,17 @@ class BasePlanFormset(BaseInlineFormSet):
             if not has_plan and not amount:
                 msg = 'Please enter the price of this device'
                 self._errors[i]['amount'] = self.error_class([msg])
+
+    def save_existing(self, form, instance, commit=True):
+        """Override save_existing for cloned contributions."""
+        if self.clone:
+            form.instance.id = None
+            return self.save_new(form)
+        return super(BasePlanFormset, self).save_existing(form, instance, commit)
+
+    def save(self, *args, **kwargs):
+        """Override save method for cloned contributions."""
+        if self.clone:
+            for form in self.initial_forms:
+                form.changed_data.append('id')
+        return super(BasePlanFormset, self).save()
