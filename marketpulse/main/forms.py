@@ -68,11 +68,12 @@ class LocationForm(forms.ModelForm):
         self.is_media = kwargs.pop('is_media', False)
         super(LocationForm, self).__init__(*args, **kwargs)
         if not self.is_media:
-            self.fields['shop_name'].initial = 'Please add the name of the shop'
+            self.fields['shop_name'].initial = ''
 
     def clean(self):
         cdata = super(LocationForm, self).clean()
         url = cdata.get('link')
+
         if cdata['is_online']:
             if not cdata['country']:
                 msg = 'Please provide a country'
@@ -80,6 +81,9 @@ class LocationForm(forms.ModelForm):
             if not url:
                 msg = 'Please provide a URL'
                 self._errors['link'] = self.error_class([msg])
+        elif not cdata['shop_name']:
+            msg = 'You must submit a name for this shop'
+            self._errors['shop_name'] = self.error_class([msg])
 
         if url and not urlparse(url).scheme:
             url = 'http://' + url
