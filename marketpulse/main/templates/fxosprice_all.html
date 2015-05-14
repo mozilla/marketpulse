@@ -42,6 +42,7 @@
     <table class="table table-condensed contribution-table">
       <thead>
         <tr>
+          <td>Firefox OS</td>
           <td>Device</td>
           <td>When</td>
           <td>Country</td>
@@ -54,6 +55,13 @@
       <tbody>
         {% for contribution in contributions %}
           <tr>
+            <td>
+              {% if contribution.device.is_fxos %}
+                <span class="glyphicon glyphicon-ok"></span>
+              {% else %}
+                <span class="glyphicon glyphicon-remove"></span>
+              {% endif %}
+            </td>
             <td>{{ contribution.device }}</td>
             <td>{{ contribution.created_on|date("D d M Y") }}</td>
             <td>{{ contribution.location.country.name }}</td>
