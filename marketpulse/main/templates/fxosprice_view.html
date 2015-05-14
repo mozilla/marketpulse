@@ -25,7 +25,7 @@
       </div>
       <div class="contribution-label">
         <legend>When</legend>
-        <div>{{ contribution.created_on|timesince }} ago</div>
+        <div>{{ contribution.created_on|date("D d M Y, H:i") }}</div>
       </div>
       <div class="contribution-label">
         <legend>Shop</legend>

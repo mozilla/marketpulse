@@ -55,7 +55,7 @@
         {% for contribution in contributions %}
           <tr>
             <td>{{ contribution.device }}</td>
-            <td>{{ contribution.created_on|timesince }} ago</td>
+            <td>{{ contribution.created_on|date("D d M Y") }}</td>
             <td>{{ contribution.location.country.name }}</td>
             <td class="hidden-xs">{{ contribution.location.shop_name }}</td>
             <td>
