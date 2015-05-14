@@ -76,7 +76,8 @@ def edit_contribution(request, contribution_pk=None, clone=False):
                                         extra=extra, can_delete=False)
     plan_formset = PlanFormset(request.POST or None, instance=contribution)
     device_form = DeviceForm(request.POST or None, initial=other_device)
-    contribution_form = forms.ContributionForm(instance=contribution, clone=clone)
+    contribution_form = forms.ContributionForm(request.POST or None,
+                                               instance=contribution, clone=clone)
 
     if location_form.is_valid() and plan_formset.is_valid() and device_form.is_valid():
         is_fxos = device_form.cleaned_data['is_fxos']
