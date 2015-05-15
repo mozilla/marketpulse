@@ -25,7 +25,7 @@
       </div>
       <div class="contribution-label">
         <legend>When</legend>
-        <div>{{ contribution.created_on|timesince }} ago</div>
+        <div>{{ contribution.created_on|date("D d M Y, H:i") }}</div>
       </div>
       <div class="contribution-label">
         <legend>Shop</legend>
@@ -45,6 +45,11 @@
         <legend>Device</legend>
         <div>
           {{ contribution.device }} &bull;
+          {% if contribution.device.is_fxos %}
+            Firefox OS &bull;
+          {% else %}
+            Other OS &bull;
+          {% endif %}
           {% if contribution.availability %}
             <span class="text-success">Available</span>
           {% else %}
