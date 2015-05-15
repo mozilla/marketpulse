@@ -76,7 +76,7 @@ def edit_contribution(request, contribution_pk=None, clone=False):
     PlanFormset = inlineformset_factory(Contribution, Plan, formset=forms.BasePlanFormset,
                                         extra=extra, can_delete=False)
     device_form = DeviceForm(request.POST or None, initial=other_device)
-    contribution_form = forms.ContributionForm(request.POST or None,
+    contribution_form = forms.ContributionForm(request.POST or None, is_fxos=is_fxos,
                                                instance=contribution, clone=clone)
     plan_formset = PlanFormset(request.POST or None, instance=contribution,
                                clone=clone)
