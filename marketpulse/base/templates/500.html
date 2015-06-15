@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 error">
+      <h2>Server error</h2>
+
+      <h1>500</h1>
+
+      <p>Something went wrong.</p>
+      <p>Head back <a href="{{ url('main:home') }}">home</a>.</p>
+    </div>
+
+    <div class="col-md-6">
+      <img class="main-image" src="{{ static('img/error.jpg') }}" alt="">
+    </div>
+  </div>
+{% endblock %}

@@ -8,6 +8,8 @@ import jingo.monkey
 
 jingo.monkey.patch()
 
+handler404 = 'marketpulse.base.views.custom_404'
+handler500 = 'marketpulse.base.views.custom_500'
 
 urlpatterns = patterns(
     '',
@@ -24,6 +26,8 @@ urlpatterns = patterns(
 if settings.DEBUG:
     urlpatterns += patterns(
         '',
+        url(r'^404/$', handler404),
+        url(r'^500/$', handler500),
         url(r'^files/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
     )
