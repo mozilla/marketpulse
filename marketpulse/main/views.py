@@ -244,9 +244,6 @@ def new_media(request):
         obj.save()
 
         messages.success(request, 'Contribution successfully saved')
-        contribution_form = forms.ImageForm()
-        location_form = forms.LocationForm()
-
         return redirect(reverse('main:activities'))
 
     return render(request, 'media_new.html',

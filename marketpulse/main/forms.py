@@ -81,7 +81,7 @@ class LocationForm(forms.ModelForm):
             if not url:
                 msg = 'Please provide a URL'
                 self._errors['link'] = self.error_class([msg])
-        elif not cdata['shop_name']:
+        elif not cdata['shop_name'] and not self.is_media:
             msg = 'You must submit a name for this shop'
             self._errors['shop_name'] = self.error_class([msg])
 
