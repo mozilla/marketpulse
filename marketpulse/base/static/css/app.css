@@ -90,6 +90,12 @@ a:focus.persona-button {
     padding: 2px;
 }
 
+.error {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
 @media only screen and (max-width:760px) {
     #wrapper {
         width: 98%;
@@ -125,6 +131,10 @@ a:focus.persona-button {
 
     .main-logo {
         display: none;
+    }
+
+    .error {
+        margin-top: 0px;
     }
 }
 

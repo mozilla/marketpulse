@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 error">
+      <h2>Page not found</h2>
+
+      <h1>404</h1>
+
+      <p>Looks like the page you're looking for was not found.</p>
+      <p>Head back <a href="{{ url('main:home') }}">home</a>.</p>
+    </div>
+
+    <div class="col-md-6">
+      <img class="main-image" src="{{ static('img/error.jpg') }}" alt="">
+    </div>
+  </div>
+{% endblock %}
