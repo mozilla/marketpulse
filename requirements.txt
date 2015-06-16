@@ -20,9 +20,6 @@ python-decouple==2.3
 # sha256: LiSsXQBNtXFJdqBKwOgMbfbkfpjDVMssDYL4h51Pj9s
 Jinja2==2.7.3
 
-# sha256: uUMeohGZBz7HGJQTjybYoIOh0XNpND3isezYVNLIYV0
-https://github.com/jbalogh/jingo/archive/fce09043542e71d972cc97d2ae703740741f80d0.zip#egg=jingo
-
 # sha256: pOwa_1m5WhS0XrLiN2GgF56YMZ2lp-t2tW6ozce4ccM
 MarkupSafe==0.23
 
@@ -126,7 +123,10 @@ peep==2.4
 Pillow==2.8.1
 # sha256: 2LKtaRR0PXvOm3gItcXM8KIyRxxHzJ7IjeL6XV5VRDo
 django-imagekit==3.2.6
+# sha256: uhN1-xAk6OkVR1BNQ5IyF5XJif3lALluvHyTiE94bmA
 # sha256: PZvJY9gAiuFR1sZk-f1VRCcF6puebXznfN1Av5LZHzo
 django-appconf==1.0.1
 # sha256: Xyd9H1YPFIiPg8VMBJr8NLh0Smql4ri_WwjEDqAd1Sg
 pilkit==1.1.12
+# sha256: xJWo39CpwdPY7QISG7sotsnTTU2jCqk6fmOcDz17Bjk
+jingo==0.7.1
