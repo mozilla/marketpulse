@@ -25,7 +25,10 @@ def reverse_geocode(lat, lng):
     for feature in data['features']:
         text = feature['text']
         if feature['id'].startswith('country.'):
-            results['country'] = COUNTRY_CODES[text]
+            try:
+                results['country'] = COUNTRY_CODES[text]
+            except KeyError:
+                results['country'] = text
         if feature['id'].startswith('region.'):
             results['region'] = text
         if feature['id'].startswith('place.'):
